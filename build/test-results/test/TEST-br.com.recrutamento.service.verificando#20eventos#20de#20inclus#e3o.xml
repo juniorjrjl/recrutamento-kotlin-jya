@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="br.com.recrutamento.service.verificando eventos de inclusão" tests="2" skipped="0" failures="0" errors="0" timestamp="2019-03-25T01:22:13" hostname="junior-pc" time="0.149">
+  <properties/>
+  <testcase name="verificando inclusão de comentarios(String)[1]" classname="br.com.recrutamento.service.verificando eventos de inclusão" time="0.034"/>
+  <testcase name="verificando a inclusão de issue(String)[1]" classname="br.com.recrutamento.service.verificando eventos de inclusão" time="0.074"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

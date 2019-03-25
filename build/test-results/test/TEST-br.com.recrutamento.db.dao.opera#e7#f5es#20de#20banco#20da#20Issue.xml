@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="br.com.recrutamento.db.dao.operações de banco da Issue" tests="7" skipped="0" failures="0" errors="0" timestamp="2019-03-25T01:22:08" hostname="junior-pc" time="0.652">
+  <properties/>
+  <testcase name="atualizando data de fechamento()" classname="br.com.recrutamento.db.dao.operações de banco da Issue" time="0.07"/>
+  <testcase name="buscar id Issue cadastradao()" classname="br.com.recrutamento.db.dao.operações de banco da Issue" time="0.065"/>
+  <testcase name="verificando atualização de Issue()" classname="br.com.recrutamento.db.dao.operações de banco da Issue" time="0.1"/>
+  <testcase name="quando informar nome de usuário vazio disparar exeption()" classname="br.com.recrutamento.db.dao.operações de banco da Issue" time="0.084"/>
+  <testcase name="atualizando data de atualizacao()" classname="br.com.recrutamento.db.dao.operações de banco da Issue" time="0.049"/>
+  <testcase name="quando IdGitHub inexistente retornar null()" classname="br.com.recrutamento.db.dao.operações de banco da Issue" time="0.125"/>
+  <testcase name="excluindo Issue por IdGitHub()" classname="br.com.recrutamento.db.dao.operações de banco da Issue" time="0.112"/>
+  <system-out><![CDATA[SQL: CREATE TABLE IF NOT EXISTS ISSUES ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "number" BIGINT NULL, "title" VARCHAR(255) NULL, "state" INT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "closed_at" DATETIME NULL, "user_name" VARCHAR(39) NOT NULL, "id_git_hub" BIGINT NULL)
+SQL: ALTER TABLE ISSUES ADD CONSTRAINT uk_id_github_issues UNIQUE ("id_git_hub")
+SQL: CREATE TABLE IF NOT EXISTS COMMENTS ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "user_name" VARCHAR(39) NOT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "id_issue" BIGINT NULL, "id_git_hub" BIGINT NULL)
+SQL: ALTER TABLE COMMENTS ADD CONSTRAINT uk_id_github_comments UNIQUE ("id_git_hub")
+SQL: ALTER TABLE COMMENTS ADD CONSTRAINT FK_COMMENTS_ID_ISSUE_ID FOREIGN KEY ("id_issue") REFERENCES COMMENTS("id") ON UPDATE CASCADE
+SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-03-24 19:22:08.726000', '2019-03-24 19:22:08.726000', 1, 1, 1, 'title_test', '2019-03-24 19:22:08.726000', 'user_test')
+SQL: UPDATE ISSUES SET "closed_at"='2019-05-24 19:22:08.711000', "state"=0 WHERE ISSUES."id_git_hub" = 1
+SQL: SELECT ISSUES."id", ISSUES."number", ISSUES."title", ISSUES."body", ISSUES."state", ISSUES."created_at", ISSUES."updated_at", ISSUES."closed_at", ISSUES."user_name" FROM ISSUES WHERE ISSUES."number" = 1
+SQL: DROP TABLE IF EXISTS COMMENTS
+SQL: DROP TABLE IF EXISTS ISSUES
+SQL: CREATE TABLE IF NOT EXISTS ISSUES ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "number" BIGINT NULL, "title" VARCHAR(255) NULL, "state" INT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "closed_at" DATETIME NULL, "user_name" VARCHAR(39) NOT NULL, "id_git_hub" BIGINT NULL)
+SQL: ALTER TABLE ISSUES ADD CONSTRAINT uk_id_github_issues UNIQUE ("id_git_hub")
+SQL: CREATE TABLE IF NOT EXISTS COMMENTS ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "user_name" VARCHAR(39) NOT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "id_issue" BIGINT NULL, "id_git_hub" BIGINT NULL)
+SQL: ALTER TABLE COMMENTS ADD CONSTRAINT uk_id_github_comments UNIQUE ("id_git_hub")
+SQL: ALTER TABLE COMMENTS ADD CONSTRAINT FK_COMMENTS_ID_ISSUE_ID FOREIGN KEY ("id_issue") REFERENCES COMMENTS("id") ON UPDATE CASCADE
+SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-03-24 19:22:08.820000', '2019-03-24 19:22:08.820000', 1, 1, 1, 'title_test', '2019-03-24 19:22:08.820000', 'user_test')
+SQL: SELECT ISSUES."id" FROM ISSUES WHERE ISSUES."id_git_hub" = 1
+SQL: DROP TABLE IF EXISTS COMMENTS
+SQL: DROP TABLE IF EXISTS ISSUES
+SQL: CREATE TABLE IF NOT EXISTS ISSUES ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "number" BIGINT NULL, "title" VARCHAR(255) NULL, "state" INT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "closed_at" DATETIME NULL, "user_name" VARCHAR(39) NOT NULL, "id_git_hub" BIGINT NULL)
+SQL: ALTER TABLE ISSUES ADD CONSTRAINT uk_id_github_issues UNIQUE ("id_git_hub")
+SQL: CREATE TABLE IF NOT EXISTS COMMENTS ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "user_name" VARCHAR(39) NOT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "id_issue" BIGINT NULL, "id_git_hub" BIGINT NULL)
+SQL: ALTER TABLE COMMENTS ADD CONSTRAINT uk_id_github_comments UNIQUE ("id_git_hub")
+SQL: ALTER TABLE COMMENTS ADD CONSTRAINT FK_COMMENTS_ID_ISSUE_ID FOREIGN KEY ("id_issue") REFERENCES COMMENTS("id") ON UPDATE CASCADE
+SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-03-24 19:22:08.898000', '2019-03-24 19:22:08.898000', 1, 1, 0, 'title_test', '2019-03-24 19:22:08.898000', 'user_test')
+SQL: UPDATE ISSUES SET "title"='new title', "body"='new body', "state"=1, "updated_at"='2069-03-24 19:22:08.898000' WHERE ISSUES."id_git_hub" = 1
+SQL: SELECT ISSUES."id", ISSUES."number", ISSUES."title", ISSUES."body", ISSUES."state", ISSUES."created_at", ISSUES."updated_at", ISSUES."closed_at", ISSUES."user_name" FROM ISSUES WHERE ISSUES."number" = 1
+SQL: DROP TABLE IF EXISTS COMMENTS
+SQL: DROP TABLE IF EXISTS ISSUES
+SQL: CREATE TABLE IF NOT EXISTS ISSUES ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "number" BIGINT NULL, "title" VARCHAR(255) NULL, "state" INT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "closed_at" DATETIME NULL, "user_name" VARCHAR(39) NOT NULL, "id_git_hub" BIGINT NULL)
+SQL: ALTER TABLE ISSUES ADD CONSTRAINT uk_id_github_issues UNIQUE ("id_git_hub")
+SQL: CREATE TABLE IF NOT EXISTS COMMENTS ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "user_name" VARCHAR(39) NOT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "id_issue" BIGINT NULL, "id_git_hub" BIGINT NULL)
+SQL: ALTER TABLE COMMENTS ADD CONSTRAINT uk_id_github_comments UNIQUE ("id_git_hub")
+SQL: ALTER TABLE COMMENTS ADD CONSTRAINT FK_COMMENTS_ID_ISSUE_ID FOREIGN KEY ("id_issue") REFERENCES COMMENTS("id") ON UPDATE CASCADE
+SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-04-24 19:22:08.992000', '2019-03-24 19:22:08.992000', 1, 1, 0, 'title_test', '2019-03-25 19:22:08.992000', 'user_test')
+SQL: SELECT ISSUES."id", ISSUES."number", ISSUES."title", ISSUES."body", ISSUES."state", ISSUES."created_at", ISSUES."updated_at", ISSUES."closed_at", ISSUES."user_name" FROM ISSUES WHERE ISSUES."number" = 1
+SQL: DROP TABLE IF EXISTS COMMENTS
+SQL: DROP TABLE IF EXISTS ISSUES
+SQL: CREATE TABLE IF NOT EXISTS ISSUES ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "number" BIGINT NULL, "title" VARCHAR(255) NULL, "state" INT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "closed_at" DATETIME NULL, "user_name" VARCHAR(39) NOT NULL, "id_git_hub" BIGINT NULL)
+SQL: ALTER TABLE ISSUES ADD CONSTRAINT uk_id_github_issues UNIQUE ("id_git_hub")
+SQL: CREATE TABLE IF NOT EXISTS COMMENTS ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "user_name" VARCHAR(39) NOT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "id_issue" BIGINT NULL, "id_git_hub" BIGINT NULL)
+SQL: ALTER TABLE COMMENTS ADD CONSTRAINT uk_id_github_comments UNIQUE ("id_git_hub")
+SQL: ALTER TABLE COMMENTS ADD CONSTRAINT FK_COMMENTS_ID_ISSUE_ID FOREIGN KEY ("id_issue") REFERENCES COMMENTS("id") ON UPDATE CASCADE
+SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-03-24 19:22:09.086000', '2019-03-24 19:22:09.086000', 1, 1, 1, 'title_test', '2019-03-24 19:22:09.086000', 'user_test')
+SQL: UPDATE ISSUES SET "updated_at"='2019-03-29 19:22:09.086000', "state"=0 WHERE ISSUES."id_git_hub" = 1
+SQL: SELECT ISSUES."id", ISSUES."number", ISSUES."title", ISSUES."body", ISSUES."state", ISSUES."created_at", ISSUES."updated_at", ISSUES."closed_at", ISSUES."user_name" FROM ISSUES WHERE ISSUES."number" = 1
+SQL: DROP TABLE IF EXISTS COMMENTS
+SQL: DROP TABLE IF EXISTS ISSUES
+SQL: CREATE TABLE IF NOT EXISTS ISSUES ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "number" BIGINT NULL, "title" VARCHAR(255) NULL, "state" INT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "closed_at" DATETIME NULL, "user_name" VARCHAR(39) NOT NULL, "id_git_hub" BIGINT NULL)
+SQL: ALTER TABLE ISSUES ADD CONSTRAINT uk_id_github_issues UNIQUE ("id_git_hub")
+SQL: CREATE TABLE IF NOT EXISTS COMMENTS ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "user_name" VARCHAR(39) NOT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "id_issue" BIGINT NULL, "id_git_hub" BIGINT NULL)
+SQL: ALTER TABLE COMMENTS ADD CONSTRAINT uk_id_github_comments UNIQUE ("id_git_hub")
+SQL: ALTER TABLE COMMENTS ADD CONSTRAINT FK_COMMENTS_ID_ISSUE_ID FOREIGN KEY ("id_issue") REFERENCES COMMENTS("id") ON UPDATE CASCADE
+SQL: SELECT ISSUES."id" FROM ISSUES WHERE ISSUES."id_git_hub" = 10
+SQL: DROP TABLE IF EXISTS COMMENTS
+SQL: DROP TABLE IF EXISTS ISSUES
+SQL: CREATE TABLE IF NOT EXISTS ISSUES ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "number" BIGINT NULL, "title" VARCHAR(255) NULL, "state" INT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "closed_at" DATETIME NULL, "user_name" VARCHAR(39) NOT NULL, "id_git_hub" BIGINT NULL)
+SQL: ALTER TABLE ISSUES ADD CONSTRAINT uk_id_github_issues UNIQUE ("id_git_hub")
+SQL: CREATE TABLE IF NOT EXISTS COMMENTS ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "user_name" VARCHAR(39) NOT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "id_issue" BIGINT NULL, "id_git_hub" BIGINT NULL)
+SQL: ALTER TABLE COMMENTS ADD CONSTRAINT uk_id_github_comments UNIQUE ("id_git_hub")
+SQL: ALTER TABLE COMMENTS ADD CONSTRAINT FK_COMMENTS_ID_ISSUE_ID FOREIGN KEY ("id_issue") REFERENCES COMMENTS("id") ON UPDATE CASCADE
+SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-03-24 19:22:09.273000', '2019-03-24 19:22:09.273000', 1, 1, 1, 'title_test', '2019-03-24 19:22:09.273000', 'user_test')
+SQL: DELETE FROM ISSUES WHERE ISSUES."id_git_hub" = 1
+SQL: SELECT ISSUES."id", ISSUES."number", ISSUES."title", ISSUES."body", ISSUES."state", ISSUES."created_at", ISSUES."updated_at", ISSUES."closed_at", ISSUES."user_name" FROM ISSUES WHERE ISSUES."number" = 1
+SQL: DROP TABLE IF EXISTS COMMENTS
+SQL: DROP TABLE IF EXISTS ISSUES
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

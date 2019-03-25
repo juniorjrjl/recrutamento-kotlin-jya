@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="br.com.recrutamento.service.EventServiceTratativaErroTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2019-03-25T01:22:11" hostname="junior-pc" time="1.367">
+  <properties/>
+  <testcase name="verificando envio de jsons inválidos(String)[1]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.056"/>
+  <testcase name="verificando envio de jsons inválidos(String)[2]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.005"/>
+  <testcase name="verificando envio de jsons inválidos(String)[3]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.018"/>
+  <testcase name="verificando envio de jsons inválidos(String)[4]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.003"/>
+  <testcase name="verificando envio de jsons inválidos(String)[5]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.002"/>
+  <testcase name="verificando envio de json nulo()" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.003"/>
+  <testcase name="verificando violação de constraint da issue(String)[1]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.426"/>
+  <testcase name="verificando violação de constraint da issue(String)[2]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.054"/>
+  <testcase name="verificando violação de constraint do comentário(String)[1]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.185"/>
+  <testcase name="verificando violação de constraint do comentário(String)[2]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.036"/>
+  <testcase name="simulando lancamento de exception na busca de Issues(long)[1]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.012"/>
+  <testcase name="simulando lancamento de exception na busca de Issues(long)[2]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[mar 24, 2019 10:22:10 PM org.hibernate.validator.internal.util.Version <clinit>
+INFO: HV000001: Hibernate Validator 6.0.16.Final
+]]></system-err>
+</testsuite>

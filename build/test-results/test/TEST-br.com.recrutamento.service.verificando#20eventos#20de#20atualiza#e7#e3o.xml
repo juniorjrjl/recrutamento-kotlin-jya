@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="br.com.recrutamento.service.verificando eventos de atualização" tests="3" skipped="0" failures="0" errors="0" timestamp="2019-03-25T01:22:12" hostname="junior-pc" time="0.281">
+  <properties/>
+  <testcase name="verificando fechamento de Issue(String)[1]" classname="br.com.recrutamento.service.verificando eventos de atualização" time="0.051"/>
+  <testcase name="verificando atualização de issue(String)[1]" classname="br.com.recrutamento.service.verificando eventos de atualização" time="0.026"/>
+  <testcase name="verificando atualização de comentário(String)[1]" classname="br.com.recrutamento.service.verificando eventos de atualização" time="0.013"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

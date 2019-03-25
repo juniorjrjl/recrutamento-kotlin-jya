@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Issues.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">recrutamento-kotlin-jya</a> &gt; <a href="index.source.html" class="el_package">br.com.recrutamento.db.table</a> &gt; <span class="el_source">Issues.kt</span></div><h1>Issues.kt</h1><pre class="source lang-java linenums">package br.com.recrutamento.db.table
+
+import br.com.recrutamento.db.table.Comments.nullable
+import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.min
+
+<span class="fc" id="L7">object Issues: Table() {</span>
+
+<span class="fc" id="L9">    val id = long(&quot;id&quot;).autoIncrement().primaryKey()</span>
+<span class="fc" id="L10">    val number = long(&quot;number&quot;).nullable()</span>
+<span class="fc" id="L11">    val title = varchar(&quot;title&quot;, 255, null).nullable()</span>
+<span class="fc" id="L12">    val state = integer(&quot;state&quot;).nullable()</span>
+<span class="fc" id="L13">    val body = varchar(&quot;body&quot;, 255, null).nullable()</span>
+<span class="fc" id="L14">    val createdAt = datetime(&quot;created_at&quot;).nullable()</span>
+<span class="fc" id="L15">    val updatedAt = datetime(&quot;updated_at&quot;).nullable()</span>
+<span class="fc" id="L16">    val closedAt = datetime(&quot;closed_at&quot;).nullable()</span>
+<span class="fc" id="L17">    val userName = varchar(&quot;user_name&quot;, 39, null)</span>
+<span class="fc" id="L18">    val idGitHub = long(&quot;id_git_hub&quot;).uniqueIndex(&quot;uk_id_github_issues&quot;).nullable()</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

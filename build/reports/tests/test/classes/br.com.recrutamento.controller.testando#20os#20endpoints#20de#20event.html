@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - testando os endpoints de event</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>testando os endpoints de event</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/br.com.recrutamento.controller.html">br.com.recrutamento.controller</a> &gt; testando os endpoints de event</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">6</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">5.600s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard error</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">testar eventServiceException()</td>
+<td class="success">3.038s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testar internalServerError evento()</td>
+<td class="success">0.176s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testar retorno Issue()</td>
+<td class="success">0.985s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testar retorno de issue inexistente()</td>
+<td class="success">0.029s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testar retorno statuscode 500()</td>
+<td class="success">0.154s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testar sucesso processamento()</td>
+<td class="success">1.218s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre>[Test worker] INFO org.eclipse.jetty.util.log - Logging initialized @4207ms to org.eclipse.jetty.util.log.Slf4jLog
+[Test worker] INFO io.javalin.Javalin - 
+ _________________________________________
+|        _                  _ _           |
+|       | | __ ___   ____ _| (_)_ __      |
+|    _  | |/ _` \ \ / / _` | | | '_ \     |
+|   | |_| | (_| |\ V / (_| | | | | | |    |
+|    \___/ \__,_| \_/ \__,_|_|_|_| |_|    |
+|_________________________________________|
+|                                         |
+|    https://javalin.io/documentation     |
+|_________________________________________|
+[Test worker] INFO io.javalin.Javalin - Starting Javalin ...
+[Test worker] INFO org.eclipse.jetty.server.Server - jetty-9.4.15.v20190215; built: 2019-02-15T16:53:49.381Z; git: eb70b240169fcf1abbd86af36482d1c49826fa0b; jvm 9.0.1+11
+[Test worker] INFO org.eclipse.jetty.server.session - DefaultSessionIdManager workerName=node0
+[Test worker] INFO org.eclipse.jetty.server.session - No SessionScavenger set, using defaults
+[Test worker] INFO org.eclipse.jetty.server.session - node0 Scavenging every 600000ms
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Started i.j.c.u.@2a0d5fcc{/,null,AVAILABLE}
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@76accd1c{/,null,AVAILABLE}
+[Test worker] INFO org.eclipse.jetty.server.AbstractConnector - Started ServerConnector@6f51eac3{HTTP/1.1,[http/1.1]}{0.0.0.0:9090}
+[Test worker] INFO org.eclipse.jetty.server.Server - Started @5538ms
+[Test worker] INFO io.javalin.Javalin - Jetty is listening on: [http://localhost:9090/]
+[Test worker] INFO io.javalin.Javalin - Javalin has started \o/
+[Test worker] INFO io.javalin.Javalin - Stopping Javalin ...
+[Test worker] INFO org.eclipse.jetty.server.AbstractConnector - Stopped ServerConnector@6f51eac3{HTTP/1.1,[http/1.1]}{0.0.0.0:9090}
+[Test worker] INFO org.eclipse.jetty.server.session - node0 Stopped scavenging
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@76accd1c{/,null,UNAVAILABLE}
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Stopped i.j.c.u.@2a0d5fcc{/,null,UNAVAILABLE}
+[Test worker] INFO io.javalin.Javalin - Javalin has stopped
+[Test worker] INFO io.javalin.Javalin - 
+ _________________________________________
+|        _                  _ _           |
+|       | | __ ___   ____ _| (_)_ __      |
+|    _  | |/ _` \ \ / / _` | | | '_ \     |
+|   | |_| | (_| |\ V / (_| | | | | | |    |
+|    \___/ \__,_| \_/ \__,_|_|_|_| |_|    |
+|_________________________________________|
+|                                         |
+|    https://javalin.io/documentation     |
+|_________________________________________|
+[Test worker] INFO io.javalin.Javalin - Starting Javalin ...
+[Test worker] INFO org.eclipse.jetty.server.Server - jetty-9.4.15.v20190215; built: 2019-02-15T16:53:49.381Z; git: eb70b240169fcf1abbd86af36482d1c49826fa0b; jvm 9.0.1+11
+[Test worker] INFO org.eclipse.jetty.server.session - DefaultSessionIdManager workerName=node0
+[Test worker] INFO org.eclipse.jetty.server.session - No SessionScavenger set, using defaults
+[Test worker] INFO org.eclipse.jetty.server.session - node0 Scavenging every 600000ms
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Started i.j.c.u.@1838e5dc{/,null,AVAILABLE}
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@3f02af72{/,null,AVAILABLE}
+[Test worker] INFO org.eclipse.jetty.server.AbstractConnector - Started ServerConnector@c163680{HTTP/1.1,[http/1.1]}{0.0.0.0:9090}
+[Test worker] INFO org.eclipse.jetty.server.Server - Started @10482ms
+[Test worker] INFO io.javalin.Javalin - Jetty is listening on: [http://localhost:9090/]
+[Test worker] INFO io.javalin.Javalin - Javalin has started \o/
+[Test worker] INFO io.javalin.Javalin - Stopping Javalin ...
+[Test worker] INFO org.eclipse.jetty.server.AbstractConnector - Stopped ServerConnector@c163680{HTTP/1.1,[http/1.1]}{0.0.0.0:9090}
+[Test worker] INFO org.eclipse.jetty.server.session - node0 Stopped scavenging
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@3f02af72{/,null,UNAVAILABLE}
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Stopped i.j.c.u.@1838e5dc{/,null,UNAVAILABLE}
+[Test worker] INFO io.javalin.Javalin - Javalin has stopped
+[Test worker] INFO io.javalin.Javalin - 
+ _________________________________________
+|        _                  _ _           |
+|       | | __ ___   ____ _| (_)_ __      |
+|    _  | |/ _` \ \ / / _` | | | '_ \     |
+|   | |_| | (_| |\ V / (_| | | | | | |    |
+|    \___/ \__,_| \_/ \__,_|_|_|_| |_|    |
+|_________________________________________|
+|                                         |
+|    https://javalin.io/documentation     |
+|_________________________________________|
+[Test worker] INFO io.javalin.Javalin - Starting Javalin ...
+[Test worker] INFO org.eclipse.jetty.server.Server - jetty-9.4.15.v20190215; built: 2019-02-15T16:53:49.381Z; git: eb70b240169fcf1abbd86af36482d1c49826fa0b; jvm 9.0.1+11
+[Test worker] INFO org.eclipse.jetty.server.session - DefaultSessionIdManager workerName=node0
+[Test worker] INFO org.eclipse.jetty.server.session - No SessionScavenger set, using defaults
+[Test worker] INFO org.eclipse.jetty.server.session - node0 Scavenging every 600000ms
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Started i.j.c.u.@68c8c91c{/,null,AVAILABLE}
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@63b61e4a{/,null,AVAILABLE}
+[Test worker] INFO org.eclipse.jetty.server.AbstractConnector - Started ServerConnector@27f619a{HTTP/1.1,[http/1.1]}{0.0.0.0:9090}
+[Test worker] INFO org.eclipse.jetty.server.Server - Started @13616ms
+[Test worker] INFO io.javalin.Javalin - Jetty is listening on: [http://localhost:9090/]
+[Test worker] INFO io.javalin.Javalin - Javalin has started \o/
+[Test worker] INFO io.javalin.Javalin - Stopping Javalin ...
+[Test worker] INFO org.eclipse.jetty.server.AbstractConnector - Stopped ServerConnector@27f619a{HTTP/1.1,[http/1.1]}{0.0.0.0:9090}
+[Test worker] INFO org.eclipse.jetty.server.session - node0 Stopped scavenging
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@63b61e4a{/,null,UNAVAILABLE}
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Stopped i.j.c.u.@68c8c91c{/,null,UNAVAILABLE}
+[Test worker] INFO io.javalin.Javalin - Javalin has stopped
+[Test worker] INFO io.javalin.Javalin - 
+ _________________________________________
+|        _                  _ _           |
+|       | | __ ___   ____ _| (_)_ __      |
+|    _  | |/ _` \ \ / / _` | | | '_ \     |
+|   | |_| | (_| |\ V / (_| | | | | | |    |
+|    \___/ \__,_| \_/ \__,_|_|_|_| |_|    |
+|_________________________________________|
+|                                         |
+|    https://javalin.io/documentation     |
+|_________________________________________|
+[Test worker] INFO io.javalin.Javalin - Starting Javalin ...
+[Test worker] INFO org.eclipse.jetty.server.Server - jetty-9.4.15.v20190215; built: 2019-02-15T16:53:49.381Z; git: eb70b240169fcf1abbd86af36482d1c49826fa0b; jvm 9.0.1+11
+[Test worker] INFO org.eclipse.jetty.server.session - DefaultSessionIdManager workerName=node0
+[Test worker] INFO org.eclipse.jetty.server.session - No SessionScavenger set, using defaults
+[Test worker] INFO org.eclipse.jetty.server.session - node0 Scavenging every 600000ms
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Started i.j.c.u.@707520f1{/,null,AVAILABLE}
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@3c551c2f{/,null,AVAILABLE}
+[Test worker] INFO org.eclipse.jetty.server.AbstractConnector - Started ServerConnector@5704af9{HTTP/1.1,[http/1.1]}{0.0.0.0:9090}
+[Test worker] INFO org.eclipse.jetty.server.Server - Started @13921ms
+[Test worker] INFO io.javalin.Javalin - Jetty is listening on: [http://localhost:9090/]
+[Test worker] INFO io.javalin.Javalin - Javalin has started \o/
+[Test worker] INFO io.javalin.Javalin - Stopping Javalin ...
+[Test worker] INFO org.eclipse.jetty.server.AbstractConnector - Stopped ServerConnector@5704af9{HTTP/1.1,[http/1.1]}{0.0.0.0:9090}
+[Test worker] INFO org.eclipse.jetty.server.session - node0 Stopped scavenging
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@3c551c2f{/,null,UNAVAILABLE}
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Stopped i.j.c.u.@707520f1{/,null,UNAVAILABLE}
+[Test worker] INFO io.javalin.Javalin - Javalin has stopped
+[Test worker] INFO io.javalin.Javalin - 
+ _________________________________________
+|        _                  _ _           |
+|       | | __ ___   ____ _| (_)_ __      |
+|    _  | |/ _` \ \ / / _` | | | '_ \     |
+|   | |_| | (_| |\ V / (_| | | | | | |    |
+|    \___/ \__,_| \_/ \__,_|_|_|_| |_|    |
+|_________________________________________|
+|                                         |
+|    https://javalin.io/documentation     |
+|_________________________________________|
+[Test worker] INFO io.javalin.Javalin - Starting Javalin ...
+[Test worker] INFO org.eclipse.jetty.server.Server - jetty-9.4.15.v20190215; built: 2019-02-15T16:53:49.381Z; git: eb70b240169fcf1abbd86af36482d1c49826fa0b; jvm 9.0.1+11
+[Test worker] INFO org.eclipse.jetty.server.session - DefaultSessionIdManager workerName=node0
+[Test worker] INFO org.eclipse.jetty.server.session - No SessionScavenger set, using defaults
+[Test worker] INFO org.eclipse.jetty.server.session - node0 Scavenging every 600000ms
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Started i.j.c.u.@12ddaa3a{/,null,AVAILABLE}
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@1c7ca7b6{/,null,AVAILABLE}
+[Test worker] INFO org.eclipse.jetty.server.AbstractConnector - Started ServerConnector@12ec8fbc{HTTP/1.1,[http/1.1]}{0.0.0.0:9090}
+[Test worker] INFO org.eclipse.jetty.server.Server - Started @14975ms
+[Test worker] INFO io.javalin.Javalin - Jetty is listening on: [http://localhost:9090/]
+[Test worker] INFO io.javalin.Javalin - Javalin has started \o/
+[Test worker] INFO io.javalin.Javalin - Stopping Javalin ...
+[Test worker] INFO org.eclipse.jetty.server.AbstractConnector - Stopped ServerConnector@12ec8fbc{HTTP/1.1,[http/1.1]}{0.0.0.0:9090}
+[Test worker] INFO org.eclipse.jetty.server.session - node0 Stopped scavenging
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@1c7ca7b6{/,null,UNAVAILABLE}
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Stopped i.j.c.u.@12ddaa3a{/,null,UNAVAILABLE}
+[Test worker] INFO io.javalin.Javalin - Javalin has stopped
+[Test worker] INFO io.javalin.Javalin - 
+ _________________________________________
+|        _                  _ _           |
+|       | | __ ___   ____ _| (_)_ __      |
+|    _  | |/ _` \ \ / / _` | | | '_ \     |
+|   | |_| | (_| |\ V / (_| | | | | | |    |
+|    \___/ \__,_| \_/ \__,_|_|_|_| |_|    |
+|_________________________________________|
+|                                         |
+|    https://javalin.io/documentation     |
+|_________________________________________|
+[Test worker] INFO io.javalin.Javalin - Starting Javalin ...
+[Test worker] INFO org.eclipse.jetty.server.Server - jetty-9.4.15.v20190215; built: 2019-02-15T16:53:49.381Z; git: eb70b240169fcf1abbd86af36482d1c49826fa0b; jvm 9.0.1+11
+[Test worker] INFO org.eclipse.jetty.server.session - DefaultSessionIdManager workerName=node0
+[Test worker] INFO org.eclipse.jetty.server.session - No SessionScavenger set, using defaults
+[Test worker] INFO org.eclipse.jetty.server.session - node0 Scavenging every 660000ms
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Started i.j.c.u.@63a5db51{/,null,AVAILABLE}
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@223b4693{/,null,AVAILABLE}
+[Test worker] INFO org.eclipse.jetty.server.AbstractConnector - Started ServerConnector@2319de2e{HTTP/1.1,[http/1.1]}{0.0.0.0:9090}
+[Test worker] INFO org.eclipse.jetty.server.Server - Started @15230ms
+[Test worker] INFO io.javalin.Javalin - Jetty is listening on: [http://localhost:9090/]
+[Test worker] INFO io.javalin.Javalin - Javalin has started \o/
+[Test worker] INFO io.javalin.Javalin - Stopping Javalin ...
+[Test worker] INFO org.eclipse.jetty.server.AbstractConnector - Stopped ServerConnector@2319de2e{HTTP/1.1,[http/1.1]}{0.0.0.0:9090}
+[Test worker] INFO org.eclipse.jetty.server.session - node0 Stopped scavenging
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@223b4693{/,null,UNAVAILABLE}
+[Test worker] INFO org.eclipse.jetty.server.handler.ContextHandler - Stopped i.j.c.u.@63a5db51{/,null,UNAVAILABLE}
+[Test worker] INFO io.javalin.Javalin - Javalin has stopped
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 4.10</a> at 24 de mar de 2019 22:22:14</p>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CommentDAOImpl.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">recrutamento-kotlin-jya</a> &gt; <a href="index.source.html" class="el_package">br.com.recrutamento.db.dao.impl</a> &gt; <span class="el_source">CommentDAOImpl.kt</span></div><h1>CommentDAOImpl.kt</h1><pre class="source lang-java linenums">package br.com.recrutamento.db.dao.impl
+
+import br.com.recrutamento.db.dao.ICommentDAO
+import br.com.recrutamento.db.table.Comments
+import br.com.recrutamento.db.util.ConversaoDados
+import br.com.recrutamento.dto.CommentAtualizarDTO
+import br.com.recrutamento.dto.CommentCadastroDTO
+import br.com.recrutamento.dto.CommentDetalhadoDTO
+import org.jetbrains.exposed.sql.*
+import org.joda.time.DateTime
+import java.time.ZoneOffset
+
+<span class="fc" id="L13">class CommentDAOImpl : ICommentDAO {</span>
+
+    override fun cadastrar(dto: CommentCadastroDTO){
+<span class="fc" id="L16">        Comments.insert {</span>
+<span class="pc bpc" id="L17" title="1 of 2 branches missed.">            it[Comments.userName] = dto.userName?:&quot;&quot;</span>
+<span class="fc" id="L18">            it[Comments.body] = dto.body</span>
+<span class="fc" id="L19">            it[Comments.createdAt] = ConversaoDados.gerarDateTime(dto.createdAt)</span>
+<span class="fc" id="L20">            it[Comments.updatedAt] = ConversaoDados.gerarDateTime(dto.updatedAt)</span>
+<span class="fc" id="L21">            it[Comments.idIssue] = dto.idIssue</span>
+<span class="fc" id="L22">            it[Comments.idGitHub] = dto.idGitHub</span>
+<span class="fc" id="L23">        }</span>
+<span class="fc" id="L24">    }</span>
+
+    override fun atualizar(dto: CommentAtualizarDTO){
+<span class="fc" id="L27">        Comments.update({Comments.idGitHub eq dto.idGitHub}){</span>
+<span class="fc" id="L28">            it[Comments.body] = dto.body</span>
+<span class="fc" id="L29">            it[Comments.updatedAt] = DateTime(dto.updatedAt.toInstant(ZoneOffset.UTC).toEpochMilli())</span>
+<span class="fc" id="L30">        }</span>
+<span class="fc" id="L31">    }</span>
+
+<span class="fc" id="L33">    override fun excluirPorIdGitHub(idGitHub: Long) { Comments.deleteWhere { Comments.idGitHub eq idGitHub } }</span>
+
+<span class="fc" id="L35">    override fun excluirCommentsIssue(idIssue: Long) { Comments.deleteWhere { Comments.idIssue eq idIssue } }</span>
+
+    override fun buscarCommentsIssue(idIssue: Long): List&lt;CommentDetalhadoDTO&gt;{
+<span class="fc" id="L38">        var dto: MutableList&lt;CommentDetalhadoDTO&gt; = mutableListOf()</span>
+<span class="fc" id="L39">        val retorno = Comments.slice(Comments.userName, Comments.body, Comments.createdAt, Comments.updatedAt)</span>
+<span class="fc" id="L40">            .select { Comments.idIssue eq idIssue }</span>
+<span class="fc" id="L41">            .orderBy(Comments.createdAt to SortOrder.DESC)</span>
+<span class="fc" id="L42">        .map { it[Comments.userName] to it[Comments.body] to it[Comments.createdAt] to it[Comments.updatedAt]</span>
+            }
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        if (retorno.isEmpty()){</span>
+<span class="fc" id="L45">            dto = mutableListOf&lt;CommentDetalhadoDTO&gt;()</span>
+        }else{
+<span class="fc" id="L47">            retorno.forEach {</span>
+<span class="fc" id="L48">                dto.add(CommentDetalhadoDTO(it.first.first.first,</span>
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">                    it.first.first.second ?: &quot;&quot;,</span>
+<span class="fc" id="L50">                    ConversaoDados.gerarLocalDateTime(it.first.second),</span>
+<span class="fc" id="L51">                    ConversaoDados.gerarLocalDateTime(it.second)))</span>
+<span class="fc" id="L52">            }</span>
+        }
+<span class="fc" id="L54">        return dto.toList()</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
