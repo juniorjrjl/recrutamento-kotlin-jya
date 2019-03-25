@@ -1,9 +1,13 @@
-#Instruções para rodar o projeto:
+# Instruções para rodar o projeto:
 
 Para rodar o projeto em produção siga as seguintes instruções:
 
 * Crie no PostgreSQL um banco de dados chamado "webhock";
 * Edite as configurações do banco de dados (usuário, senha, porta, etc.) no arquivo "application.properties" em "src/main/resources";
+
+Testes:
+
+* Os testes estão usando o banco de dados H2 em memória, caso deseje alterar alguma configuração acesse o arquivo "application.properties" em "scr/test/resources".
 
 Observações:
 
@@ -12,7 +16,3 @@ Observações:
 * A letra V inicial deve ser maiúscula e devem ser 2 underlines após o número do arquivo de migração;
 * Faça a classe implementar a classe "BaseJavaMigration" do package "org.flywaydb.core.api.migration.BaseJavaMigration";
 * Inclua os comandos sql que devem ser executados quando a aplicação iniciar;
-
-Observações:
-
-* Os testes estão usando o banco de dados H2 em memória, caso deseje alterar alguma configuração acesse o arquivo "application.properties" em "scr/test/resources".
