@@ -1,8 +1,6 @@
 package br.com.recrutamento.db.table
 
-import br.com.recrutamento.db.table.Comments.nullable
 import org.jetbrains.exposed.sql.Table
-import org.jetbrains.exposed.sql.min
 
 object Issues: Table() {
 

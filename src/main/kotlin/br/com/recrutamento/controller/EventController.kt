@@ -1,6 +1,5 @@
 package br.com.recrutamento.controller
 
-import br.com.recrutamento.config.InjectConfig
 import br.com.recrutamento.dto.ErroResponse
 import br.com.recrutamento.exception.EventServiceException
 import br.com.recrutamento.service.EventService
