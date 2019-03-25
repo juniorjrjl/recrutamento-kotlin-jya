@@ -15,11 +15,11 @@ import java.util.*
 <span class="fc" id="L15">            return config.getProperty(chave)</span>
         }
         fun buscarPropriedadeInt(chave: String):Int{
-<span class="nc bnc" id="L18" title="All 2 branches missed.">            if (config.keys.isEmpty()){</span>
+<span class="pc bpc" id="L18" title="1 of 2 branches missed.">            if (config.keys.isEmpty()){</span>
 <span class="nc" id="L19">                val input = AppConfig::class.java.getResourceAsStream(&quot;/applicattion.properties&quot;)</span>
 <span class="nc" id="L20">                config.load(input)</span>
             }
-<span class="nc" id="L22">            return config.getProperty(chave).toInt()</span>
+<span class="fc" id="L22">            return config.getProperty(chave).toInt()</span>
         }
     }
 

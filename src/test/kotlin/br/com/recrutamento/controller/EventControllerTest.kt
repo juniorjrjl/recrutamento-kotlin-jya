@@ -1,40 +1,30 @@
 package br.com.recrutamento.controller
 
 import br.com.recrutamento.config.AppConfig
-import br.com.recrutamento.controller.EventController.eventService
+import br.com.recrutamento.config.ServerConfig
 import br.com.recrutamento.dto.*
 import br.com.recrutamento.exception.EventServiceException
 import br.com.recrutamento.service.EventService
-import com.fasterxml.jackson.databind.DeserializationFeature
-import com.fasterxml.jackson.databind.MapperFeature
-import com.fasterxml.jackson.databind.PropertyNamingStrategy
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.singleton
 import com.nhaarman.mockitokotlin2.*
-import io.javalin.Javalin
-import io.javalin.apibuilder.ApiBuilder
-import io.javalin.json.JavalinJackson
 import org.eclipse.jetty.http.HttpStatus
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.w3c.dom.events.EventException
-import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class `testando os endpoints de event` {
 
-    private val app = Javalin.create().start(9090)
-
     private val eventServiceMock: EventService = mock()
 
-    private val bucarIssues = "http://localhost:9090/events/:number/events"
-    private val enviarEvento = "http://localhost:9090/webhook"
+    private val bucarIssues = "http://localhost:${AppConfig.buscarPropriedade("javalin.port")}/github/issues/:number/events"
+    private val enviarEvento = "http://localhost:${AppConfig.buscarPropriedade("javalin.port")}/github/webhook"
 
     private val kodein : Kodein = Kodein{
         bind<EventService>() with singleton { eventServiceMock }
@@ -42,22 +32,13 @@ class `testando os endpoints de event` {
 
     @BeforeEach
     fun `setUp`(){
-        JavalinJackson.configure(jacksonObjectMapper().findAndRegisterModules())
         EventController.eventService = eventServiceMock
-        app.routes{
-            ApiBuilder.path("events/:number/events") {
-                ApiBuilder.get(EventController::getIssue)
-            }
-            ApiBuilder.path("webhook") {
-                ApiBuilder.post(EventController::salvar)
-            }
-        }
-        app
+        ServerConfig.iniciarServidor()
     }
 
     @AfterEach
     fun `tearDown`(){
-        app.stop()
+        ServerConfig.pararServidor()
     }
 
     inline fun <reified T: Any>String.deserialize(): T  = jacksonObjectMapper().readValue(this)

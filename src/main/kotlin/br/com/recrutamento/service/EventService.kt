@@ -14,7 +14,6 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.instance
-import db.migration.V201903251426__CriacaoTabelasProjeto
 import org.apache.commons.lang3.exception.ExceptionUtils
 import org.hibernate.validator.internal.metadata.descriptor.ConstraintDescriptorImpl
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -66,38 +65,69 @@ class EventService (private val kodein: Kodein){
             }else if (jsonEvento.startsWith(EDICAO_ISSUE)){
                 if (jsonEvento.contains(INICIO_COMMENT)){
                     val dto = montarComment(jsonEvento)
-                    Conexao.criarConexao()
-                    transaction {
-                        commentDAO.atualizar(CommentAtualizarDTO(dto!!.body, dto.updatedAt, dto.idGitHub))
+                    try {
+                        Conexao.criarConexao()
+                        transaction {
+                            commentDAO.atualizar(CommentAtualizarDTO(dto!!.body, dto.updatedAt, dto.idGitHub))
+                        }
+                    }catch (e: Exception){
+                        log.error("erro ao atualizar o comantario ${dto.toString()}")
+                        log.error(ExceptionUtils.getStackTrace(e))
+                        throw e
                     }
                 }else{
                     val dto = montarIssue(jsonEvento)
-                    Conexao.criarConexao()
-                    transaction {
-                        issueDAO.atualizar(IssueAtualizacaoDTO(dto!!.idGitHub, dto.title, dto.body, dto.state, dto.updatedAt!!)
-                        )
+                    try {
+                        Conexao.criarConexao()
+                        transaction {
+                            issueDAO.atualizar(
+                                IssueAtualizacaoDTO(dto!!.idGitHub, dto.title, dto.body, dto.state, dto.updatedAt!!)
+                            )
+                        }
+                    }catch (e: Exception){
+                        log.error("erro ao atualizar a issue ${dto.toString()}")
+                        log.error(ExceptionUtils.getStackTrace(e))
+                        throw e
                     }
                 }
             }else if(jsonEvento.startsWith(EVENTO_EXCLUSAO)){
                 if (jsonEvento.contains(INICIO_COMMENT)){
                     val dto = montarComment(jsonEvento)
-                    Conexao.criarConexao()
-                    transaction {
-                        commentDAO.excluirPorIdGitHub(dto!!.idGitHub)
+                    try {
+                        Conexao.criarConexao()
+                        transaction {
+                            commentDAO.excluirPorIdGitHub(dto!!.idGitHub)
+                        }
+                    }catch (e: Exception){
+                        log.error("erro ao excluir o comentario ${dto.toString()}")
+                        log.error(ExceptionUtils.getStackTrace(e))
+                        throw e
                     }
                 }else{
                     val dto = montarIssue(jsonEvento)
-                    Conexao.criarConexao()
-                    transaction {
-                        issueDAO.excluirPorIdGitHub(dto!!.idGitHub)
-                        commentDAO.excluirCommentsIssue(issueDAO.buscarIdIssue(dto.idGitHub) ?: 0L)
+                    try {
+                        Conexao.criarConexao()
+                        transaction {
+                            commentDAO.excluirCommentsIssue(issueDAO.buscarIdIssue(dto!!.idGitHub) ?: 0L)
+                            issueDAO.excluirPorIdGitHub(dto.idGitHub)
+                        }
+                    }catch (e: Exception){
+                        log.error("erro ao excluir a issue ${dto.toString()}")
+                        log.error(ExceptionUtils.getStackTrace(e))
+                        throw e
                     }
                 }
             }else if ((jsonEvento.startsWith(FECHAMENTO_ISSUE)) || (jsonEvento.startsWith(REABERTURA_ISSUE))){
                 val dto = montarIssue(jsonEvento)
-                Conexao.criarConexao()
-                transaction {
-                    issueDAO.atualizarDataFechamento(dto!!.closedAt!!, dto.state, dto.idGitHub)
+                try {
+                    Conexao.criarConexao()
+                    transaction {
+                        issueDAO.atualizarDataFechamento(dto!!.closedAt, dto.state, dto.idGitHub)
+                    }
+                }catch (e: Exception){
+                    log.error("erro ao fechar a issue ${dto.toString()}")
+                    log.error(ExceptionUtils.getStackTrace(e))
+                    throw e
                 }
             }else{
                 throw EventServiceException("Evento não implementado.")
@@ -110,19 +140,33 @@ class EventService (private val kodein: Kodein){
     @Throws(EventServiceException::class)
     private fun salvarIssue(json: String){
         val dtoGerado = montarIssue(json)
-        val dtoCadastrado = issueDAO.buscarDetalhes(dtoGerado!!.number)
-        if (dtoCadastrado != null){
+        var dtoRecuperado: IssueDetalhadaDTO? = null
+        try {
             Conexao.criarConexao()
             transaction {
-                issueDAO.atualizarDataAtualizacao(dtoGerado.updatedAt!!, dtoGerado.state, dtoGerado.idGitHub)
-                salvarComment(json, dtoCadastrado.id)
+                dtoRecuperado = issueDAO.buscarDetalhes(dtoGerado!!.number)
             }
+        }catch (e: Exception){
+            log.error("erro ao recuperar a issue $dtoRecuperado")
+            log.error(ExceptionUtils.getStackTrace(e))
+        }
+        if (dtoRecuperado != null){
+            try {
+                Conexao.criarConexao()
+                transaction {
+                    issueDAO.atualizarDataAtualizacao(dtoGerado!!.updatedAt!!, dtoGerado.state, dtoGerado.idGitHub)
+                }
+            }catch (e: Exception){
+                log.error("erro ao atualizar data de atualização $dtoGerado")
+                log.error(ExceptionUtils.getStackTrace(e))
+            }
+            salvarComment(json, dtoRecuperado!!.id)
         }else{
             val violacoes : Set<ConstraintViolation<IssueCadastroDTO>> = validator.validate(dtoGerado)
             val mensagens = StringBuilder()
             if (violacoes.any()){
                 violacoes.forEach{
-                    mensagens.append(MessageConfig.montarMensagensConstraints(dtoGerado.javaClass.simpleName + "."
+                    mensagens.append(MessageConfig.montarMensagensConstraints(dtoGerado!!.javaClass.simpleName + "."
                             + it.propertyPath.toString(), (it.constraintDescriptor as ConstraintDescriptorImpl).annotationDescriptor.attributes))
                     mensagens.append(";")
                     mensagens.append("\r\n")
@@ -130,9 +174,14 @@ class EventService (private val kodein: Kodein){
                 mensagens.setLength( mensagens.length -1)
                 throw EventServiceException("Erro ao salvar a Issue: $mensagens")
             }
-            Conexao.criarConexao()
-            transaction {
-                issueDAO.cadastrar(dtoGerado)
+            try {
+                Conexao.criarConexao()
+                transaction {
+                    issueDAO.cadastrar(dtoGerado!!)
+                }
+            }catch (e: Exception){
+                log.error("erro ao cadastrar a issue $dtoGerado")
+                log.error(ExceptionUtils.getStackTrace(e))
             }
         }
     }
@@ -153,9 +202,14 @@ class EventService (private val kodein: Kodein){
             mensagens.setLength( mensagens.length -1)
             throw EventServiceException("Erro ao salvar o Comentário: $mensagens")
         }
-        Conexao.criarConexao()
-        transaction {
-            commentDAO.cadastrar(dtoGerado)
+        try {
+            Conexao.criarConexao()
+            transaction {
+                commentDAO.cadastrar(dtoGerado)
+            }
+        }catch (e: Exception){
+            log.error("erro ao cadastrar o comentario $dtoGerado")
+            log.error(ExceptionUtils.getStackTrace(e))
         }
     }
 

@@ -23,8 +23,8 @@ class IssueDAOImpl  : IIssueDAO {
             it[body] = dto.body
             it[state] = dto.state.id
             it[createdAt] = ConversaoDados.gerarDateTime(dto.createdAt)
-            it[updatedAt] = ConversaoDados.gerarDateTime(dto.updatedAt!!)
-            it[closedAt] = ConversaoDados.gerarDateTime(dto.closedAt!!)
+            it[updatedAt] = ConversaoDados.gerarDateTime(dto.updatedAt)
+            it[closedAt] = ConversaoDados.gerarDateTime(dto.closedAt)
             it[userName] = dto.userName?:""
             it[idGitHub] = dto.idGitHub
         }
@@ -39,7 +39,7 @@ class IssueDAOImpl  : IIssueDAO {
         }
     }
 
-    override fun atualizarDataFechamento(closedAt: LocalDateTime, status: IssueStatusEnum, idGitHub: Long){
+    override fun atualizarDataFechamento(closedAt: LocalDateTime?, status: IssueStatusEnum, idGitHub: Long){
         Issues.update({Issues.idGitHub eq idGitHub}){
             it[Issues.closedAt] = ConversaoDados.gerarDateTime(closedAt)
             it[Issues.state] = status.id

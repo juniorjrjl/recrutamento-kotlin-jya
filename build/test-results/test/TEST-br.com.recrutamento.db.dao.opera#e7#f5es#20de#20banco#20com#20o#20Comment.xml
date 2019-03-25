@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="br.com.recrutamento.db.dao.operações de banco com o Comment" tests="5" skipped="0" failures="0" errors="0" timestamp="2019-03-25T18:31:27" hostname="junior-pc" time="3.268">
+<testsuite name="br.com.recrutamento.db.dao.operações de banco com o Comment" tests="5" skipped="0" failures="0" errors="0" timestamp="2019-03-25T21:30:27" hostname="junior-pc" time="2.467">
   <properties/>
-  <testcase name="verificando cadastro de comentários()" classname="br.com.recrutamento.db.dao.operações de banco com o Comment" time="2.373"/>
-  <testcase name="verificando se a listagem de Comments está ordenada pela data()" classname="br.com.recrutamento.db.dao.operações de banco com o Comment" time="0.22"/>
-  <testcase name="verificando atualização comentários()" classname="br.com.recrutamento.db.dao.operações de banco com o Comment" time="0.197"/>
-  <testcase name="verificando exclusão por IdGitHub()" classname="br.com.recrutamento.db.dao.operações de banco com o Comment" time="0.123"/>
-  <testcase name="verificando exclusão por IdIssue()" classname="br.com.recrutamento.db.dao.operações de banco com o Comment" time="0.345"/>
+  <testcase name="verificando cadastro de comentários()" classname="br.com.recrutamento.db.dao.operações de banco com o Comment" time="1.98"/>
+  <testcase name="verificando se a listagem de Comments está ordenada pela data()" classname="br.com.recrutamento.db.dao.operações de banco com o Comment" time="0.125"/>
+  <testcase name="verificando atualização comentários()" classname="br.com.recrutamento.db.dao.operações de banco com o Comment" time="0.096"/>
+  <testcase name="verificando exclusão por IdGitHub()" classname="br.com.recrutamento.db.dao.operações de banco com o Comment" time="0.08"/>
+  <testcase name="verificando exclusão por IdIssue()" classname="br.com.recrutamento.db.dao.operações de banco com o Comment" time="0.179"/>
   <system-out><![CDATA[SQL: CREATE TABLE IF NOT EXISTS ISSUES ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "number" BIGINT NULL, "title" VARCHAR(255) NULL, "state" INT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "closed_at" DATETIME NULL, "user_name" VARCHAR(39) NOT NULL, "id_git_hub" BIGINT NULL)
 SQL: ALTER TABLE ISSUES ADD CONSTRAINT uk_id_github_issues UNIQUE ("id_git_hub")
 SQL: CREATE TABLE IF NOT EXISTS COMMENTS ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "user_name" VARCHAR(39) NOT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "id_issue" BIGINT NULL, "id_git_hub" BIGINT NULL)
 SQL: ALTER TABLE COMMENTS ADD CONSTRAINT uk_id_github_comments UNIQUE ("id_git_hub")
 SQL: ALTER TABLE COMMENTS ADD CONSTRAINT FK_COMMENTS_ID_ISSUE_ID FOREIGN KEY ("id_issue") REFERENCES COMMENTS("id") ON UPDATE CASCADE
-SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-04-25 12:31:29.968000', '2019-03-25 12:31:29.968000', 1, 1, 0, 'title_test', '2019-03-26 12:31:29.968000', 'user_test')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 12:31:30.265000', 1, 1, '2019-03-26 12:31:30.265000', 'username')
+SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-04-25 15:30:29.268000', '2019-03-25 15:30:29.268000', 1, 1, 0, 'title_test', '2019-03-26 15:30:29.268000', 'user_test')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 15:30:29.436000', 1, 1, '2019-03-26 15:30:29.436000', 'username')
 SQL: SELECT COMMENTS."user_name", COMMENTS."body", COMMENTS."created_at", COMMENTS."updated_at" FROM COMMENTS WHERE COMMENTS."id_issue" = 1 ORDER BY COMMENTS."created_at" DESC
 SQL: DROP TABLE IF EXISTS COMMENTS
 SQL: DROP TABLE IF EXISTS ISSUES
@@ -21,17 +21,17 @@ SQL: ALTER TABLE ISSUES ADD CONSTRAINT uk_id_github_issues UNIQUE ("id_git_hub")
 SQL: CREATE TABLE IF NOT EXISTS COMMENTS ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "user_name" VARCHAR(39) NOT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "id_issue" BIGINT NULL, "id_git_hub" BIGINT NULL)
 SQL: ALTER TABLE COMMENTS ADD CONSTRAINT uk_id_github_comments UNIQUE ("id_git_hub")
 SQL: ALTER TABLE COMMENTS ADD CONSTRAINT FK_COMMENTS_ID_ISSUE_ID FOREIGN KEY ("id_issue") REFERENCES COMMENTS("id") ON UPDATE CASCADE
-SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-04-25 12:31:30.499000', '2019-03-25 12:31:30.499000', 1, 1, 0, 'title_test', '2019-03-26 12:31:30.499000', 'user_test')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-24 12:31:30.499000', 1, 1, '2019-03-25 12:31:30.499000', 'userName')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-27 12:31:30.531000', 2, 1, '2019-03-25 12:31:30.531000', 'userName')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-22 12:31:30.531000', 3, 1, '2019-03-25 12:31:30.531000', 'userName')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-29 12:31:30.546000', 4, 1, '2019-03-25 12:31:30.546000', 'userName')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-20 12:31:30.546000', 5, 1, '2019-03-25 12:31:30.546000', 'userName')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-31 12:31:30.546000', 6, 1, '2019-03-25 12:31:30.546000', 'userName')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-18 12:31:30.546000', 7, 1, '2019-03-25 12:31:30.546000', 'userName')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-04-02 12:31:30.546000', 8, 1, '2019-03-25 12:31:30.546000', 'userName')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-16 12:31:30.562000', 9, 1, '2019-03-25 12:31:30.562000', 'userName')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-04-04 12:31:30.562000', 10, 1, '2019-03-25 12:31:30.562000', 'userName')
+SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-04-25 15:30:29.545000', '2019-03-25 15:30:29.545000', 1, 1, 0, 'title_test', '2019-03-26 15:30:29.545000', 'user_test')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-24 15:30:29.558000', 1, 1, '2019-03-25 15:30:29.558000', 'userName')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-27 15:30:29.564000', 2, 1, '2019-03-25 15:30:29.564000', 'userName')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-22 15:30:29.567000', 3, 1, '2019-03-25 15:30:29.567000', 'userName')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-29 15:30:29.570000', 4, 1, '2019-03-25 15:30:29.570000', 'userName')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-20 15:30:29.573000', 5, 1, '2019-03-25 15:30:29.573000', 'userName')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-31 15:30:29.575000', 6, 1, '2019-03-25 15:30:29.575000', 'userName')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-18 15:30:29.577000', 7, 1, '2019-03-25 15:30:29.577000', 'userName')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-04-02 15:30:29.582000', 8, 1, '2019-03-25 15:30:29.582000', 'userName')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-16 15:30:29.586000', 9, 1, '2019-03-25 15:30:29.586000', 'userName')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-04-04 15:30:29.588000', 10, 1, '2019-03-25 15:30:29.588000', 'userName')
 SQL: SELECT COMMENTS."user_name", COMMENTS."body", COMMENTS."created_at", COMMENTS."updated_at" FROM COMMENTS WHERE COMMENTS."id_issue" = 1 ORDER BY COMMENTS."created_at" DESC
 SQL: DROP TABLE IF EXISTS COMMENTS
 SQL: DROP TABLE IF EXISTS ISSUES
@@ -40,9 +40,9 @@ SQL: ALTER TABLE ISSUES ADD CONSTRAINT uk_id_github_issues UNIQUE ("id_git_hub")
 SQL: CREATE TABLE IF NOT EXISTS COMMENTS ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "user_name" VARCHAR(39) NOT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "id_issue" BIGINT NULL, "id_git_hub" BIGINT NULL)
 SQL: ALTER TABLE COMMENTS ADD CONSTRAINT uk_id_github_comments UNIQUE ("id_git_hub")
 SQL: ALTER TABLE COMMENTS ADD CONSTRAINT FK_COMMENTS_ID_ISSUE_ID FOREIGN KEY ("id_issue") REFERENCES COMMENTS("id") ON UPDATE CASCADE
-SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-04-25 12:31:30.640000', '2019-03-25 12:31:30.640000', 1, 1, 0, 'title_test', '2019-03-26 12:31:30.640000', 'user_test')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 12:31:30.703000', 1, 1, '2019-03-26 01:31:30.703000', 'username')
-SQL: UPDATE COMMENTS SET "body"='novo corpo', "updated_at"='2019-03-26 01:31:30.703000' WHERE COMMENTS."id_git_hub" = 1
+SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-04-25 15:30:29.685000', '2019-03-25 15:30:29.685000', 1, 1, 0, 'title_test', '2019-03-26 15:30:29.685000', 'user_test')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 15:30:29.691000', 1, 1, '2019-03-26 04:30:29.691000', 'username')
+SQL: UPDATE COMMENTS SET "body"='novo corpo', "updated_at"='2019-03-26 04:30:29.691000' WHERE COMMENTS."id_git_hub" = 1
 SQL: SELECT COMMENTS."user_name", COMMENTS."body", COMMENTS."created_at", COMMENTS."updated_at" FROM COMMENTS WHERE COMMENTS."id_issue" = 1 ORDER BY COMMENTS."created_at" DESC
 SQL: DROP TABLE IF EXISTS COMMENTS
 SQL: DROP TABLE IF EXISTS ISSUES
@@ -51,8 +51,8 @@ SQL: ALTER TABLE ISSUES ADD CONSTRAINT uk_id_github_issues UNIQUE ("id_git_hub")
 SQL: CREATE TABLE IF NOT EXISTS COMMENTS ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "user_name" VARCHAR(39) NOT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "id_issue" BIGINT NULL, "id_git_hub" BIGINT NULL)
 SQL: ALTER TABLE COMMENTS ADD CONSTRAINT uk_id_github_comments UNIQUE ("id_git_hub")
 SQL: ALTER TABLE COMMENTS ADD CONSTRAINT FK_COMMENTS_ID_ISSUE_ID FOREIGN KEY ("id_issue") REFERENCES COMMENTS("id") ON UPDATE CASCADE
-SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-04-25 12:31:30.828000', '2019-03-25 12:31:30.828000', 1, 1, 0, 'title_test', '2019-03-26 12:31:30.828000', 'user_test')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 12:31:30.828000', 1, 1, '2019-03-26 01:31:30.828000', 'username')
+SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-04-25 15:30:29.759000', '2019-03-25 15:30:29.759000', 1, 1, 0, 'title_test', '2019-03-26 15:30:29.759000', 'user_test')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 15:30:29.764000', 1, 1, '2019-03-26 04:30:29.764000', 'username')
 SQL: DELETE FROM COMMENTS WHERE COMMENTS."id_git_hub" = 1
 SQL: SELECT COMMENTS."user_name", COMMENTS."body", COMMENTS."created_at", COMMENTS."updated_at" FROM COMMENTS WHERE COMMENTS."id_issue" = 1 ORDER BY COMMENTS."created_at" DESC
 SQL: DROP TABLE IF EXISTS COMMENTS
@@ -62,26 +62,56 @@ SQL: ALTER TABLE ISSUES ADD CONSTRAINT uk_id_github_issues UNIQUE ("id_git_hub")
 SQL: CREATE TABLE IF NOT EXISTS COMMENTS ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "user_name" VARCHAR(39) NOT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "id_issue" BIGINT NULL, "id_git_hub" BIGINT NULL)
 SQL: ALTER TABLE COMMENTS ADD CONSTRAINT uk_id_github_comments UNIQUE ("id_git_hub")
 SQL: ALTER TABLE COMMENTS ADD CONSTRAINT FK_COMMENTS_ID_ISSUE_ID FOREIGN KEY ("id_issue") REFERENCES COMMENTS("id") ON UPDATE CASCADE
-SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-04-25 12:31:30.984000', '2019-03-25 12:31:30.984000', 1, 1, 0, 'title_test', '2019-03-26 12:31:30.984000', 'user_test')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 12:31:30.984000', 1, 1, '2019-03-26 01:31:30.984000', 'username')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 12:31:30.999000', 2, 1, '2019-03-26 01:31:30.984000', 'username')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 12:31:30.999000', 3, 1, '2019-03-26 01:31:30.984000', 'username')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 12:31:31.015000', 4, 1, '2019-03-26 01:31:30.984000', 'username')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 12:31:31.046000', 5, 1, '2019-03-26 01:31:30.984000', 'username')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 12:31:31.062000', 6, 1, '2019-03-26 01:31:30.984000', 'username')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 12:31:31.078000', 7, 1, '2019-03-26 01:31:30.984000', 'username')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 12:31:31.124000', 8, 1, '2019-03-26 01:31:30.984000', 'username')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 12:31:31.124000', 9, 1, '2019-03-26 01:31:30.984000', 'username')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 12:31:31.140000', 10, 1, '2019-03-26 01:31:30.984000', 'username')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 12:31:31.140000', 11, 1, '2019-03-26 01:31:30.984000', 'username')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 12:31:31.140000', 12, 1, '2019-03-26 01:31:30.984000', 'username')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 12:31:31.156000', 13, 1, '2019-03-26 01:31:30.984000', 'username')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 12:31:31.171000', 14, 1, '2019-03-26 01:31:30.984000', 'username')
-SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 12:31:31.171000', 15, 1, '2019-03-26 01:31:30.984000', 'username')
+SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-04-25 15:30:29.855000', '2019-03-25 15:30:29.855000', 1, 1, 0, 'title_test', '2019-03-26 15:30:29.855000', 'user_test')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 15:30:29.866000', 1, 1, '2019-03-26 04:30:29.863000', 'username')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 15:30:29.873000', 2, 1, '2019-03-26 04:30:29.863000', 'username')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 15:30:29.875000', 3, 1, '2019-03-26 04:30:29.863000', 'username')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 15:30:29.878000', 4, 1, '2019-03-26 04:30:29.863000', 'username')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 15:30:29.880000', 5, 1, '2019-03-26 04:30:29.863000', 'username')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 15:30:29.882000', 6, 1, '2019-03-26 04:30:29.863000', 'username')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 15:30:29.886000', 7, 1, '2019-03-26 04:30:29.863000', 'username')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 15:30:29.894000', 8, 1, '2019-03-26 04:30:29.863000', 'username')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 15:30:29.904000', 9, 1, '2019-03-26 04:30:29.863000', 'username')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 15:30:29.909000', 10, 1, '2019-03-26 04:30:29.863000', 'username')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 15:30:29.919000', 11, 1, '2019-03-26 04:30:29.863000', 'username')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 15:30:29.925000', 12, 1, '2019-03-26 04:30:29.863000', 'username')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 15:30:29.946000', 13, 1, '2019-03-26 04:30:29.863000', 'username')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 15:30:29.953000', 14, 1, '2019-03-26 04:30:29.863000', 'username')
+SQL: INSERT INTO COMMENTS ("body", "created_at", "id_git_hub", "id_issue", "updated_at", "user_name") VALUES ('body', '2019-03-25 15:30:29.959000', 15, 1, '2019-03-26 04:30:29.863000', 'username')
 SQL: DELETE FROM COMMENTS WHERE COMMENTS."id_issue" = 1
 SQL: SELECT COMMENTS."user_name", COMMENTS."body", COMMENTS."created_at", COMMENTS."updated_at" FROM COMMENTS WHERE COMMENTS."id_issue" = 1 ORDER BY COMMENTS."created_at" DESC
 SQL: DROP TABLE IF EXISTS COMMENTS
 SQL: DROP TABLE IF EXISTS ISSUES
 ]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+  <system-err><![CDATA[[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-7 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-7 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-8 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-8 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-9 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-9 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-10 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-10 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-11 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-11 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-12 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-12 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-13 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-13 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-14 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-14 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-15 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-15 - Start completed.
+]]></system-err>
 </testsuite>

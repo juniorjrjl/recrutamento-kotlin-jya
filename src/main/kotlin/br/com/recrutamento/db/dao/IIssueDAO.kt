@@ -12,7 +12,7 @@ interface IIssueDAO {
 
     fun atualizar(dto: IssueAtualizacaoDTO)
 
-    fun atualizarDataFechamento(closedAt: LocalDateTime, status: IssueStatusEnum, idGitHub: Long)
+    fun atualizarDataFechamento(closedAt: LocalDateTime?, status: IssueStatusEnum, idGitHub: Long)
 
     fun atualizarDataAtualizacao(updatedAt: LocalDateTime, status: IssueStatusEnum, idGitHub: Long)
 

@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Conexao.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">recrutamento-kotlin-jya</a> &gt; <a href="index.source.html" class="el_package">br.com.recrutamento.db.conif</a> &gt; <span class="el_source">Conexao.kt</span></div><h1>Conexao.kt</h1><pre class="source lang-java linenums">package br.com.recrutamento.db.conif
 
 import br.com.recrutamento.config.AppConfig
+import com.zaxxer.hikari.HikariConfig
+import com.zaxxer.hikari.HikariDataSource
 import org.jetbrains.exposed.sql.Database
 
-<span class="nc" id="L6">class Conexao {</span>
+<span class="nc" id="L8">class Conexao {</span>
 
     companion object {
+
+        private fun hikari(): HikariDataSource {
+<span class="fc" id="L13">            val config = HikariConfig()</span>
+<span class="fc" id="L14">            config.driverClassName = AppConfig.buscarPropriedade(&quot;exposed.driver&quot;)</span>
+<span class="fc" id="L15">            config.jdbcUrl = AppConfig.buscarPropriedade(&quot;exposed.url&quot;)</span>
+<span class="fc" id="L16">            config.maximumPoolSize = AppConfig.buscarPropriedadeInt(&quot;exposed.pool_size&quot;)</span>
+<span class="fc" id="L17">            config.isAutoCommit = false</span>
+<span class="fc" id="L18">            config.transactionIsolation = &quot;TRANSACTION_REPEATABLE_READ&quot;</span>
+<span class="fc" id="L19">            config.username = AppConfig.buscarPropriedade(&quot;exposed.user&quot;)</span>
+<span class="fc" id="L20">            config.password = AppConfig.buscarPropriedade(&quot;exposed.password&quot;)</span>
+<span class="fc" id="L21">            config.validate()</span>
+<span class="fc" id="L22">            return HikariDataSource(config)</span>
+        }
+
         fun criarConexao(): Database{
-<span class="fc" id="L10">            return Database.connect(</span>
-<span class="fc" id="L11">                AppConfig.buscarPropriedade(&quot;exposed.url&quot;),</span>
-<span class="fc" id="L12">                AppConfig.buscarPropriedade(&quot;exposed.driver&quot;), AppConfig.buscarPropriedade(&quot;exposed.user&quot;), AppConfig.buscarPropriedade(&quot;exposed.password&quot;))</span>
+<span class="fc" id="L26">            return Database.connect(hikari())</span>
         }
     }
 

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="br.com.recrutamento.db.dao.operações de banco da Issue" tests="7" skipped="0" failures="0" errors="0" timestamp="2019-03-25T18:31:31" hostname="junior-pc" time="0.719">
+<testsuite name="br.com.recrutamento.db.dao.operações de banco da Issue" tests="7" skipped="0" failures="0" errors="0" timestamp="2019-03-25T21:30:30" hostname="junior-pc" time="0.734">
   <properties/>
-  <testcase name="atualizando data de fechamento()" classname="br.com.recrutamento.db.dao.operações de banco da Issue" time="0.097"/>
-  <testcase name="buscar id Issue cadastradao()" classname="br.com.recrutamento.db.dao.operações de banco da Issue" time="0.191"/>
-  <testcase name="verificando atualização de Issue()" classname="br.com.recrutamento.db.dao.operações de banco da Issue" time="0.129"/>
-  <testcase name="quando informar nome de usuário vazio disparar exeption()" classname="br.com.recrutamento.db.dao.operações de banco da Issue" time="0.077"/>
-  <testcase name="atualizando data de atualizacao()" classname="br.com.recrutamento.db.dao.operações de banco da Issue" time="0.095"/>
-  <testcase name="quando IdGitHub inexistente retornar null()" classname="br.com.recrutamento.db.dao.operações de banco da Issue" time="0.05"/>
-  <testcase name="excluindo Issue por IdGitHub()" classname="br.com.recrutamento.db.dao.operações de banco da Issue" time="0.068"/>
+  <testcase name="atualizando data de fechamento()" classname="br.com.recrutamento.db.dao.operações de banco da Issue" time="0.102"/>
+  <testcase name="buscar id Issue cadastradao()" classname="br.com.recrutamento.db.dao.operações de banco da Issue" time="0.113"/>
+  <testcase name="verificando atualização de Issue()" classname="br.com.recrutamento.db.dao.operações de banco da Issue" time="0.175"/>
+  <testcase name="quando informar nome de usuário vazio disparar exeption()" classname="br.com.recrutamento.db.dao.operações de banco da Issue" time="0.084"/>
+  <testcase name="atualizando data de atualizacao()" classname="br.com.recrutamento.db.dao.operações de banco da Issue" time="0.072"/>
+  <testcase name="quando IdGitHub inexistente retornar null()" classname="br.com.recrutamento.db.dao.operações de banco da Issue" time="0.088"/>
+  <testcase name="excluindo Issue por IdGitHub()" classname="br.com.recrutamento.db.dao.operações de banco da Issue" time="0.087"/>
   <system-out><![CDATA[SQL: CREATE TABLE IF NOT EXISTS ISSUES ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "number" BIGINT NULL, "title" VARCHAR(255) NULL, "state" INT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "closed_at" DATETIME NULL, "user_name" VARCHAR(39) NOT NULL, "id_git_hub" BIGINT NULL)
 SQL: ALTER TABLE ISSUES ADD CONSTRAINT uk_id_github_issues UNIQUE ("id_git_hub")
 SQL: CREATE TABLE IF NOT EXISTS COMMENTS ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "user_name" VARCHAR(39) NOT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "id_issue" BIGINT NULL, "id_git_hub" BIGINT NULL)
 SQL: ALTER TABLE COMMENTS ADD CONSTRAINT uk_id_github_comments UNIQUE ("id_git_hub")
 SQL: ALTER TABLE COMMENTS ADD CONSTRAINT FK_COMMENTS_ID_ISSUE_ID FOREIGN KEY ("id_issue") REFERENCES COMMENTS("id") ON UPDATE CASCADE
-SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-03-25 12:31:31.343000', '2019-03-25 12:31:31.343000', 1, 1, 1, 'title_test', '2019-03-25 12:31:31.343000', 'user_test')
-SQL: UPDATE ISSUES SET "closed_at"='2019-05-25 12:31:31.343000', "state"=0 WHERE ISSUES."id_git_hub" = 1
+SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-03-25 15:30:30.064000', '2019-03-25 15:30:30.064000', 1, 1, 1, 'title_test', '2019-03-25 15:30:30.064000', 'user_test')
+SQL: UPDATE ISSUES SET "closed_at"='2019-05-25 15:30:30.060000', "state"=0 WHERE ISSUES."id_git_hub" = 1
 SQL: SELECT ISSUES."id", ISSUES."number", ISSUES."title", ISSUES."body", ISSUES."state", ISSUES."created_at", ISSUES."updated_at", ISSUES."closed_at", ISSUES."user_name" FROM ISSUES WHERE ISSUES."number" = 1
 SQL: DROP TABLE IF EXISTS COMMENTS
 SQL: DROP TABLE IF EXISTS ISSUES
@@ -23,7 +23,7 @@ SQL: ALTER TABLE ISSUES ADD CONSTRAINT uk_id_github_issues UNIQUE ("id_git_hub")
 SQL: CREATE TABLE IF NOT EXISTS COMMENTS ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "user_name" VARCHAR(39) NOT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "id_issue" BIGINT NULL, "id_git_hub" BIGINT NULL)
 SQL: ALTER TABLE COMMENTS ADD CONSTRAINT uk_id_github_comments UNIQUE ("id_git_hub")
 SQL: ALTER TABLE COMMENTS ADD CONSTRAINT FK_COMMENTS_ID_ISSUE_ID FOREIGN KEY ("id_issue") REFERENCES COMMENTS("id") ON UPDATE CASCADE
-SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-03-25 12:31:31.533000', '2019-03-25 12:31:31.533000', 1, 1, 1, 'title_test', '2019-03-25 12:31:31.533000', 'user_test')
+SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-03-25 15:30:30.166000', '2019-03-25 15:30:30.166000', 1, 1, 1, 'title_test', '2019-03-25 15:30:30.166000', 'user_test')
 SQL: SELECT ISSUES."id" FROM ISSUES WHERE ISSUES."id_git_hub" = 1
 SQL: DROP TABLE IF EXISTS COMMENTS
 SQL: DROP TABLE IF EXISTS ISSUES
@@ -32,8 +32,8 @@ SQL: ALTER TABLE ISSUES ADD CONSTRAINT uk_id_github_issues UNIQUE ("id_git_hub")
 SQL: CREATE TABLE IF NOT EXISTS COMMENTS ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "user_name" VARCHAR(39) NOT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "id_issue" BIGINT NULL, "id_git_hub" BIGINT NULL)
 SQL: ALTER TABLE COMMENTS ADD CONSTRAINT uk_id_github_comments UNIQUE ("id_git_hub")
 SQL: ALTER TABLE COMMENTS ADD CONSTRAINT FK_COMMENTS_ID_ISSUE_ID FOREIGN KEY ("id_issue") REFERENCES COMMENTS("id") ON UPDATE CASCADE
-SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-03-25 12:31:31.659000', '2019-03-25 12:31:31.659000', 1, 1, 0, 'title_test', '2019-03-25 12:31:31.659000', 'user_test')
-SQL: UPDATE ISSUES SET "title"='new title', "body"='new body', "state"=1, "updated_at"='2069-03-25 12:31:31.657000' WHERE ISSUES."id_git_hub" = 1
+SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-03-25 15:30:30.365000', '2019-03-25 15:30:30.365000', 1, 1, 0, 'title_test', '2019-03-25 15:30:30.365000', 'user_test')
+SQL: UPDATE ISSUES SET "title"='new title', "body"='new body', "state"=1, "updated_at"='2069-03-25 15:30:30.361000' WHERE ISSUES."id_git_hub" = 1
 SQL: SELECT ISSUES."id", ISSUES."number", ISSUES."title", ISSUES."body", ISSUES."state", ISSUES."created_at", ISSUES."updated_at", ISSUES."closed_at", ISSUES."user_name" FROM ISSUES WHERE ISSUES."number" = 1
 SQL: DROP TABLE IF EXISTS COMMENTS
 SQL: DROP TABLE IF EXISTS ISSUES
@@ -42,7 +42,7 @@ SQL: ALTER TABLE ISSUES ADD CONSTRAINT uk_id_github_issues UNIQUE ("id_git_hub")
 SQL: CREATE TABLE IF NOT EXISTS COMMENTS ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "user_name" VARCHAR(39) NOT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "id_issue" BIGINT NULL, "id_git_hub" BIGINT NULL)
 SQL: ALTER TABLE COMMENTS ADD CONSTRAINT uk_id_github_comments UNIQUE ("id_git_hub")
 SQL: ALTER TABLE COMMENTS ADD CONSTRAINT FK_COMMENTS_ID_ISSUE_ID FOREIGN KEY ("id_issue") REFERENCES COMMENTS("id") ON UPDATE CASCADE
-SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-04-25 12:31:31.737000', '2019-03-25 12:31:31.737000', 1, 1, 0, 'title_test', '2019-03-26 12:31:31.737000', 'user_test')
+SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-04-25 15:30:30.420000', '2019-03-25 15:30:30.420000', 1, 1, 0, 'title_test', '2019-03-26 15:30:30.420000', 'user_test')
 SQL: SELECT ISSUES."id", ISSUES."number", ISSUES."title", ISSUES."body", ISSUES."state", ISSUES."created_at", ISSUES."updated_at", ISSUES."closed_at", ISSUES."user_name" FROM ISSUES WHERE ISSUES."number" = 1
 SQL: DROP TABLE IF EXISTS COMMENTS
 SQL: DROP TABLE IF EXISTS ISSUES
@@ -51,8 +51,8 @@ SQL: ALTER TABLE ISSUES ADD CONSTRAINT uk_id_github_issues UNIQUE ("id_git_hub")
 SQL: CREATE TABLE IF NOT EXISTS COMMENTS ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "user_name" VARCHAR(39) NOT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "id_issue" BIGINT NULL, "id_git_hub" BIGINT NULL)
 SQL: ALTER TABLE COMMENTS ADD CONSTRAINT uk_id_github_comments UNIQUE ("id_git_hub")
 SQL: ALTER TABLE COMMENTS ADD CONSTRAINT FK_COMMENTS_ID_ISSUE_ID FOREIGN KEY ("id_issue") REFERENCES COMMENTS("id") ON UPDATE CASCADE
-SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-03-25 12:31:31.800000', '2019-03-25 12:31:31.800000', 1, 1, 1, 'title_test', '2019-03-25 12:31:31.800000', 'user_test')
-SQL: UPDATE ISSUES SET "updated_at"='2019-03-30 12:31:31.800000', "state"=0 WHERE ISSUES."id_git_hub" = 1
+SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-03-25 15:30:30.525000', '2019-03-25 15:30:30.525000', 1, 1, 1, 'title_test', '2019-03-25 15:30:30.525000', 'user_test')
+SQL: UPDATE ISSUES SET "updated_at"='2019-03-30 15:30:30.521000', "state"=0 WHERE ISSUES."id_git_hub" = 1
 SQL: SELECT ISSUES."id", ISSUES."number", ISSUES."title", ISSUES."body", ISSUES."state", ISSUES."created_at", ISSUES."updated_at", ISSUES."closed_at", ISSUES."user_name" FROM ISSUES WHERE ISSUES."number" = 1
 SQL: DROP TABLE IF EXISTS COMMENTS
 SQL: DROP TABLE IF EXISTS ISSUES
@@ -69,11 +69,53 @@ SQL: ALTER TABLE ISSUES ADD CONSTRAINT uk_id_github_issues UNIQUE ("id_git_hub")
 SQL: CREATE TABLE IF NOT EXISTS COMMENTS ("id" BIGINT AUTO_INCREMENT PRIMARY KEY, "user_name" VARCHAR(39) NOT NULL, "body" VARCHAR(255) NULL, "created_at" DATETIME NULL, "updated_at" DATETIME NULL, "id_issue" BIGINT NULL, "id_git_hub" BIGINT NULL)
 SQL: ALTER TABLE COMMENTS ADD CONSTRAINT uk_id_github_comments UNIQUE ("id_git_hub")
 SQL: ALTER TABLE COMMENTS ADD CONSTRAINT FK_COMMENTS_ID_ISSUE_ID FOREIGN KEY ("id_issue") REFERENCES COMMENTS("id") ON UPDATE CASCADE
-SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-03-25 12:31:31.940000', '2019-03-25 12:31:31.940000', 1, 1, 1, 'title_test', '2019-03-25 12:31:31.940000', 'user_test')
+SQL: INSERT INTO ISSUES ("body", "closed_at", "created_at", "id_git_hub", "number", "state", "title", "updated_at", "user_name") VALUES ('body_test', '2019-03-25 15:30:30.673000', '2019-03-25 15:30:30.673000', 1, 1, 1, 'title_test', '2019-03-25 15:30:30.673000', 'user_test')
 SQL: DELETE FROM ISSUES WHERE ISSUES."id_git_hub" = 1
 SQL: SELECT ISSUES."id", ISSUES."number", ISSUES."title", ISSUES."body", ISSUES."state", ISSUES."created_at", ISSUES."updated_at", ISSUES."closed_at", ISSUES."user_name" FROM ISSUES WHERE ISSUES."number" = 1
 SQL: DROP TABLE IF EXISTS COMMENTS
 SQL: DROP TABLE IF EXISTS ISSUES
 ]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+  <system-err><![CDATA[[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-16 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-16 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-17 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-17 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-18 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-18 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-19 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-19 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-20 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-20 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-21 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-21 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-22 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-22 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-23 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-23 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-24 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-24 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-25 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-25 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-26 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-26 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-27 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-27 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-28 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-28 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-29 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-29 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-30 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-30 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-31 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-31 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-32 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-32 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-33 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-33 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-34 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-34 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-35 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-35 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-36 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-36 - Start completed.
+]]></system-err>
 </testsuite>

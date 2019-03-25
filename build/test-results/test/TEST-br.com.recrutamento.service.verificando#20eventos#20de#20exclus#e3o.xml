@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="br.com.recrutamento.service.verificando eventos de exclusão" tests="2" skipped="0" failures="0" errors="0" timestamp="2019-03-25T18:31:38" hostname="junior-pc" time="0.223">
+<testsuite name="br.com.recrutamento.service.verificando eventos de exclusão" tests="2" skipped="0" failures="0" errors="0" timestamp="2019-03-25T21:30:34" hostname="junior-pc" time="0.102">
   <properties/>
-  <testcase name="verificando exclusão de issue(String)[1]" classname="br.com.recrutamento.service.verificando eventos de exclusão" time="0.059"/>
-  <testcase name="verificando exclusão de comentario(String)[1]" classname="br.com.recrutamento.service.verificando eventos de exclusão" time="0.049"/>
+  <testcase name="verificando exclusão de issue(String)[1]" classname="br.com.recrutamento.service.verificando eventos de exclusão" time="0.037"/>
+  <testcase name="verificando exclusão de comentario(String)[1]" classname="br.com.recrutamento.service.verificando eventos de exclusão" time="0.023"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+  <system-err><![CDATA[[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-50 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-50 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-51 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-51 - Start completed.
+]]></system-err>
 </testsuite>

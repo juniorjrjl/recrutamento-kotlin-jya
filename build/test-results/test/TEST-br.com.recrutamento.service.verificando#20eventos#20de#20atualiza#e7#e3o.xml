@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="br.com.recrutamento.service.verificando eventos de atualização" tests="3" skipped="0" failures="0" errors="0" timestamp="2019-03-25T18:31:37" hostname="junior-pc" time="0.609">
+<testsuite name="br.com.recrutamento.service.verificando eventos de atualização" tests="3" skipped="0" failures="0" errors="0" timestamp="2019-03-25T21:30:33" hostname="junior-pc" time="0.268">
   <properties/>
-  <testcase name="verificando fechamento de Issue(String)[1]" classname="br.com.recrutamento.service.verificando eventos de atualização" time="0.065"/>
-  <testcase name="verificando atualização de issue(String)[1]" classname="br.com.recrutamento.service.verificando eventos de atualização" time="0.064"/>
-  <testcase name="verificando atualização de comentário(String)[1]" classname="br.com.recrutamento.service.verificando eventos de atualização" time="0.054"/>
+  <testcase name="verificando fechamento de Issue(String)[1]" classname="br.com.recrutamento.service.verificando eventos de atualização" time="0.062"/>
+  <testcase name="verificando atualização de issue(String)[1]" classname="br.com.recrutamento.service.verificando eventos de atualização" time="0.022"/>
+  <testcase name="verificando atualização de comentário(String)[1]" classname="br.com.recrutamento.service.verificando eventos de atualização" time="0.037"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+  <system-err><![CDATA[[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-47 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-47 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-48 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-48 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-49 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-49 - Start completed.
+]]></system-err>
 </testsuite>

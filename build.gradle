@@ -60,6 +60,7 @@ ext{
     versaoKhttp = '0.1.0'
     versaoFlyway = '5.2.4'
     versaoCommonsLang = '3.8.1'
+    versaoHikari = '3.3.1'
 }
 
 dependencies {
@@ -79,6 +80,7 @@ dependencies {
     compile "org.glassfish:javax.el:${versaoJavaxEl}"
     compile "org.flywaydb:flyway-core:${versaoFlyway}"
     compile "org.apache.commons:commons-lang3:${versaoCommonsLang}"
+    compile "com.zaxxer:HikariCP:${versaoHikari}"
 
     testCompile "com.h2database:h2:${versaoH2}"
     testCompile "org.mockito:mockito-core:${versaoMockito}"

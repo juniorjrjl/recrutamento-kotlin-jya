@@ -1,21 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="br.com.recrutamento.service.EventServiceTratativaErroTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2019-03-25T18:31:34" hostname="junior-pc" time="2.438">
+<testsuite name="br.com.recrutamento.service.EventServiceTratativaErroTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2019-03-25T21:30:32" hostname="junior-pc" time="1.451">
   <properties/>
-  <testcase name="verificando envio de jsons inválidos(String)[1]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.07"/>
-  <testcase name="verificando envio de jsons inválidos(String)[2]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.003"/>
-  <testcase name="verificando envio de jsons inválidos(String)[3]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.035"/>
-  <testcase name="verificando envio de jsons inválidos(String)[4]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.005"/>
-  <testcase name="verificando envio de jsons inválidos(String)[5]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.004"/>
-  <testcase name="verificando envio de json nulo()" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.009"/>
-  <testcase name="verificando violação de constraint da issue(String)[1]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.836"/>
-  <testcase name="verificando violação de constraint da issue(String)[2]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.089"/>
-  <testcase name="verificando violação de constraint do comentário(String)[1]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.163"/>
-  <testcase name="verificando violação de constraint do comentário(String)[2]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.113"/>
-  <testcase name="simulando lancamento de exception na busca de Issues(long)[1]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.076"/>
-  <testcase name="simulando lancamento de exception na busca de Issues(long)[2]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.034"/>
+  <testcase name="verificando envio de jsons inválidos(String)[1]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.05"/>
+  <testcase name="verificando envio de jsons inválidos(String)[2]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.0"/>
+  <testcase name="verificando envio de jsons inválidos(String)[3]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.014"/>
+  <testcase name="verificando envio de jsons inválidos(String)[4]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.003"/>
+  <testcase name="verificando envio de jsons inválidos(String)[5]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.003"/>
+  <testcase name="verificando envio de json nulo()" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.008"/>
+  <testcase name="verificando violação de constraint da issue(String)[1]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.404"/>
+  <testcase name="verificando violação de constraint da issue(String)[2]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.036"/>
+  <testcase name="verificando violação de constraint do comentário(String)[1]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.079"/>
+  <testcase name="verificando violação de constraint do comentário(String)[2]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.048"/>
+  <testcase name="simulando lancamento de exception na busca de Issues(long)[1]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.253"/>
+  <testcase name="simulando lancamento de exception na busca de Issues(long)[2]" classname="br.com.recrutamento.service.EventServiceTratativaErroTest" time="0.023"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[mar 25, 2019 3:31:33 PM org.hibernate.validator.internal.util.Version <clinit>
+  <system-err><![CDATA[mar 25, 2019 6:30:31 PM org.hibernate.validator.internal.util.Version <clinit>
 INFO: HV000001: Hibernate Validator 6.0.16.Final
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-37 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-37 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-38 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-38 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-39 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-39 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-40 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-40 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-41 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-41 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-42 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-42 - Start completed.
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-43 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-43 - Start completed.
 [Test worker] ERROR br.com.recrutamento.service.EventService - erro ao buscar a issue de numero 0
 [Test worker] ERROR br.com.recrutamento.service.EventService - java.lang.Exception
 	at br.com.recrutamento.service.EventServiceTratativaErroTest$simulando lancamento de exception na busca de Issues$1.answer(EventServiceTratativaErroTest.kt:59)
@@ -27,14 +41,14 @@ INFO: HV000001: Hibernate Validator 6.0.16.Final
 	at org.mockito.internal.creation.bytebuddy.MockMethodInterceptor.doIntercept(MockMethodInterceptor.java:61)
 	at org.mockito.internal.creation.bytebuddy.MockMethodInterceptor.doIntercept(MockMethodInterceptor.java:49)
 	at org.mockito.internal.creation.bytebuddy.MockMethodInterceptor$DispatcherDefaultingToRealMethod.interceptAbstract(MockMethodInterceptor.java:126)
-	at br.com.recrutamento.db.dao.IIssueDAO$MockitoMock$339581374.buscarDetalhes(Unknown Source)
-	at br.com.recrutamento.service.EventService$buscarIssue$1.invoke(EventService.kt:227)
-	at br.com.recrutamento.service.EventService$buscarIssue$1.invoke(EventService.kt:27)
+	at br.com.recrutamento.db.dao.IIssueDAO$MockitoMock$1849221419.buscarDetalhes(Unknown Source)
+	at br.com.recrutamento.service.EventService$buscarIssue$1.invoke(EventService.kt:281)
+	at br.com.recrutamento.service.EventService$buscarIssue$1.invoke(EventService.kt:26)
 	at org.jetbrains.exposed.sql.transactions.ThreadLocalTransactionManagerKt.inTopLevelTransaction(ThreadLocalTransactionManager.kt:104)
 	at org.jetbrains.exposed.sql.transactions.ThreadLocalTransactionManagerKt.transaction(ThreadLocalTransactionManager.kt:75)
 	at org.jetbrains.exposed.sql.transactions.ThreadLocalTransactionManagerKt.transaction(ThreadLocalTransactionManager.kt:58)
 	at org.jetbrains.exposed.sql.transactions.ThreadLocalTransactionManagerKt.transaction$default(ThreadLocalTransactionManager.kt:58)
-	at br.com.recrutamento.service.EventService.buscarIssue(EventService.kt:226)
+	at br.com.recrutamento.service.EventService.buscarIssue(EventService.kt:280)
 	at br.com.recrutamento.service.EventServiceTratativaErroTest$simulando lancamento de exception na busca de Issues$3.invoke(EventServiceTratativaErroTest.kt:66)
 	at br.com.recrutamento.service.EventServiceTratativaErroTest$simulando lancamento de exception na busca de Issues$3.invoke(EventServiceTratativaErroTest.kt:27)
 	at br.com.recrutamento.service.EventServiceTratativaErroTest$inlined$sam$i$org_junit_jupiter_api_function_Executable$0.execute(Assertions.kt)
@@ -170,6 +184,8 @@ INFO: HV000001: Hibernate Validator 6.0.16.Final
 	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:55)
 	at java.base/java.lang.Thread.run(Thread.java:844)
 
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-44 - Starting...
+[Test worker] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-44 - Start completed.
 [Test worker] ERROR br.com.recrutamento.service.EventService - erro ao buscar a issue de numero -1
 [Test worker] ERROR br.com.recrutamento.service.EventService - java.lang.Exception
 	at br.com.recrutamento.service.EventServiceTratativaErroTest$simulando lancamento de exception na busca de Issues$2.answer(EventServiceTratativaErroTest.kt:65)
@@ -181,14 +197,14 @@ INFO: HV000001: Hibernate Validator 6.0.16.Final
 	at org.mockito.internal.creation.bytebuddy.MockMethodInterceptor.doIntercept(MockMethodInterceptor.java:61)
 	at org.mockito.internal.creation.bytebuddy.MockMethodInterceptor.doIntercept(MockMethodInterceptor.java:49)
 	at org.mockito.internal.creation.bytebuddy.MockMethodInterceptor$DispatcherDefaultingToRealMethod.interceptAbstract(MockMethodInterceptor.java:126)
-	at br.com.recrutamento.db.dao.ICommentDAO$MockitoMock$630926671.buscarCommentsIssue(Unknown Source)
-	at br.com.recrutamento.service.EventService$buscarIssue$1.invoke(EventService.kt:229)
-	at br.com.recrutamento.service.EventService$buscarIssue$1.invoke(EventService.kt:27)
+	at br.com.recrutamento.db.dao.ICommentDAO$MockitoMock$836041676.buscarCommentsIssue(Unknown Source)
+	at br.com.recrutamento.service.EventService$buscarIssue$1.invoke(EventService.kt:283)
+	at br.com.recrutamento.service.EventService$buscarIssue$1.invoke(EventService.kt:26)
 	at org.jetbrains.exposed.sql.transactions.ThreadLocalTransactionManagerKt.inTopLevelTransaction(ThreadLocalTransactionManager.kt:104)
 	at org.jetbrains.exposed.sql.transactions.ThreadLocalTransactionManagerKt.transaction(ThreadLocalTransactionManager.kt:75)
 	at org.jetbrains.exposed.sql.transactions.ThreadLocalTransactionManagerKt.transaction(ThreadLocalTransactionManager.kt:58)
 	at org.jetbrains.exposed.sql.transactions.ThreadLocalTransactionManagerKt.transaction$default(ThreadLocalTransactionManager.kt:58)
-	at br.com.recrutamento.service.EventService.buscarIssue(EventService.kt:226)
+	at br.com.recrutamento.service.EventService.buscarIssue(EventService.kt:280)
 	at br.com.recrutamento.service.EventServiceTratativaErroTest$simulando lancamento de exception na busca de Issues$3.invoke(EventServiceTratativaErroTest.kt:66)
 	at br.com.recrutamento.service.EventServiceTratativaErroTest$simulando lancamento de exception na busca de Issues$3.invoke(EventServiceTratativaErroTest.kt:27)
 	at br.com.recrutamento.service.EventServiceTratativaErroTest$inlined$sam$i$org_junit_jupiter_api_function_Executable$0.execute(Assertions.kt)
