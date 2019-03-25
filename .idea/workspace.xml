@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e811c03c-d7e8-4e80-8647-3425473506d0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/br/com/recrutamento/controller/EventController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/br/com/recrutamento/controller/EventController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/br/com/recrutamento/db/table/Issues.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/br/com/recrutamento/db/table/Issues.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/kotlin/db/migration/V201903251426__CriacaoTabelasProjetoTest.kt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -63,13 +62,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/br/com/recrutamento/App.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+            <state relative-caret-position="153">
+              <caret line="9" column="8" lean-forward="true" selection-start-line="9" selection-start-column="8" selection-end-line="14" selection-end-column="24" />
               <folding>
                 <element signature="e#0#271#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/kotlin/db/migration/V201903251426__CriacaoTabelasProjetoTest.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="41" selection-start-line="10" selection-start-column="41" selection-end-line="10" selection-end-column="41" />
+              <folding>
+                <element signature="e#22#230#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -120,8 +131,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/kotlin/br/com/recrutamento/config/Properties.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/br/com/recrutamento/config/AppConfig.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/br/com/recrutamento/model/Comment.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/br/com/recrutamento/db/DAO/IssueDAO.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/br/com/recrutamento/dto/IssueTateEnum.kt" />
@@ -171,6 +180,8 @@
         <option value="$PROJECT_DIR$/src/main/kotlin/br/com/recrutamento/service/EventService.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/br/com/recrutamento/controller/EventController.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/br/com/recrutamento/db/table/Issues.kt" />
+        <option value="$PROJECT_DIR$/src/test/kotlin/V201903251426__CriacaoTabelasProjetoTest.kt" />
+        <option value="$PROJECT_DIR$/src/test/kotlin/db/migration/V201903251426__CriacaoTabelasProjetoTest.kt" />
       </list>
     </option>
   </component>
@@ -248,6 +259,35 @@
               <item name="kotlin" type="462c0819:PsiDirectoryNode" />
               <item name="recrutamento" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="recrutamento-kotlin-jya" type="b2602c69:ProjectViewProjectNode" />
+              <item name="recrutamento-kotlin-jya" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
+              <item name="migration" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="recrutamento-kotlin-jya" type="b2602c69:ProjectViewProjectNode" />
+              <item name="recrutamento-kotlin-jya" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="recrutamento-kotlin-jya" type="b2602c69:ProjectViewProjectNode" />
+              <item name="recrutamento-kotlin-jya" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="recrutamento-kotlin-jya" type="b2602c69:ProjectViewProjectNode" />
+              <item name="recrutamento-kotlin-jya" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
+              <item name="recrutamento" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -257,7 +297,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553552530107" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553552880642" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../kotlin/blog-api" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -278,6 +318,7 @@
       <recent name="A:\projetos_estudo\recrutamento-kotlin-jya\src\test\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="A:\projetos_estudo\recrutamento-kotlin-jya\src\test\kotlin\db\migration" />
       <recent name="A:\projetos_estudo\recrutamento-kotlin-jya\src\main\resources" />
       <recent name="A:\projetos_estudo\recrutamento-kotlin-jya\src\main\resources\br\com\recrutamento\config" />
     </key>
@@ -294,7 +335,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Kotlin.AppKt">
+  <component name="RunManager" selected="Gradle.recrutamento-kotlin-jya [jacocoTestReport]">
     <configuration name="recrutamento-kotlin-jya [jacocoTestCoverageVerification]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -352,17 +393,17 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="verificando eventos de inclusão.verificando a inclusão de issue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="verificando a migração do flyway.rodando a migração para validação" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="br.com.recrutamento.recrutamento-kotlin-jya.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="br.com.recrutamento.service.*" />
+          <option name="PATTERN" value="db.migration.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="br.com.recrutamento.service" />
-      <option name="MAIN_CLASS_NAME" value="br.com.recrutamento.service.verificando eventos de inclusão" />
-      <option name="METHOD_NAME" value="verificando a inclusão de issue(java.lang.String)" />
+      <option name="PACKAGE_NAME" value="db.migration" />
+      <option name="MAIN_CLASS_NAME" value="db.migration.verificando a migração do flyway" />
+      <option name="METHOD_NAME" value="rodando a migração para validação" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -383,11 +424,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.verificando a migração do flyway.rodando a migração para validação" />
         <item itemvalue="Kotlin.AppKt" />
         <item itemvalue="Gradle.recrutamento-kotlin-jya [test]" />
         <item itemvalue="Gradle.recrutamento-kotlin-jya [jacocoTestReport]" />
         <item itemvalue="Gradle.recrutamento-kotlin-jya [jacocoTestCoverageVerification]" />
-        <item itemvalue="JUnit.verificando eventos de inclusão.verificando a inclusão de issue" />
       </list>
     </recent_temporary>
   </component>
@@ -410,7 +451,7 @@
       <workItem from="1553358023245" duration="22065000" />
       <workItem from="1553447097429" duration="25274000" />
       <workItem from="1553513144948" duration="11343000" />
-      <workItem from="1553541126349" duration="10192000" />
+      <workItem from="1553541126349" duration="10515000" />
     </task>
     <servers />
   </component>
@@ -447,13 +488,13 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="117228000" />
+    <option name="totallyTimeSpent" value="117551000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="2576" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26788554" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26788554" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -462,13 +503,13 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4964229" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4964229" weight="0.32936078" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49403816" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Build" order="7" weight="0.32936078" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50596184" side_tool="true" weight="0.3997833" />
       <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49602544" weight="0.32936078" />
@@ -545,13 +586,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-api/5.4.1/f4cf9cd39e4ca54b2a88402de1acc11ca1498650/junit-jupiter-api-5.4.1-sources.jar!/org/junit/jupiter/api/AssertThrows.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="58" selection-start-line="58" selection-end-line="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/5991ca87ef1fb5544943d9abc5a9a37583fabe03/annotations-13.0-sources.jar!/org/jetbrains/annotations/NotNull.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -971,10 +1005,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/br/com/recrutamento/App.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+        <state relative-caret-position="153">
+          <caret line="9" column="8" lean-forward="true" selection-start-line="9" selection-start-column="8" selection-end-line="14" selection-end-column="24" />
           <folding>
             <element signature="e#0#271#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/kotlin/db/migration/V201903251426__CriacaoTabelasProjetoTest.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="41" selection-start-line="10" selection-start-column="41" selection-end-line="10" selection-end-column="41" />
+          <folding>
+            <element signature="e#22#230#0" expanded="true" />
           </folding>
         </state>
       </provider>
