@@ -14,205 +14,227 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.instance
+import db.migration.V201903251426__CriacaoTabelasProjeto
+import org.apache.commons.lang3.exception.ExceptionUtils
 import org.hibernate.validator.internal.metadata.descriptor.ConstraintDescriptorImpl
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.slf4j.LoggerFactory
 import java.lang.StringBuilder
 import java.text.SimpleDateFormat
 import javax.validation.ConstraintViolation
 import javax.validation.Validator
 
-<span class="fc" id="L24">class EventService (private val kodein: Kodein){</span>
+<span class="fc" id="L27">class EventService (private val kodein: Kodein){</span>
 
-<span class="fc" id="L26">    private val INICIO_ISSUE = &quot;&quot;&quot;&quot;issue&quot;:&quot;&quot;&quot;</span>
-<span class="fc" id="L27">    private val FINAL_ISSUE = &quot;&quot;&quot;&quot;repository&quot;:{&quot;&quot;&quot;</span>
-<span class="fc" id="L28">    private val INICIO_COMMENT = &quot;&quot;&quot;&quot;comment&quot;:&quot;&quot;&quot;</span>
+<span class="fc" id="L29">    private val log = LoggerFactory.getLogger(EventService::class.java)</span>
 
-<span class="fc" id="L30">    private val CRIACAO_ISSUE = &quot;&quot;&quot;{&quot;action&quot;:&quot;created&quot;,&quot;&quot;&quot;</span>
-<span class="fc" id="L31">    private val EDICAO_ISSUE = &quot;&quot;&quot;{&quot;action&quot;:&quot;edited&quot;,&quot;&quot;&quot;</span>
-<span class="fc" id="L32">    private val ABERTURA_ISSUE = &quot;&quot;&quot;{&quot;action&quot;:&quot;opened&quot;,&quot;&quot;&quot;</span>
-<span class="fc" id="L33">    private val EVENTO_EXCLUSAO = &quot;&quot;&quot;{&quot;action&quot;:&quot;deleted&quot;,&quot;&quot;&quot;</span>
-<span class="fc" id="L34">    private val FECHAMENTO_ISSUE = &quot;&quot;&quot;{&quot;action&quot;:&quot;closed&quot;,&quot;&quot;&quot;</span>
-<span class="fc" id="L35">    private val REABERTURA_ISSUE = &quot;&quot;&quot;{&quot;action&quot;:&quot;reopened&quot;,&quot;&quot;&quot;</span>
+<span class="fc" id="L31">    private val INICIO_ISSUE = &quot;&quot;&quot;&quot;issue&quot;:&quot;&quot;&quot;</span>
+<span class="fc" id="L32">    private val FINAL_ISSUE = &quot;&quot;&quot;&quot;repository&quot;:{&quot;&quot;&quot;</span>
+<span class="fc" id="L33">    private val INICIO_COMMENT = &quot;&quot;&quot;&quot;comment&quot;:&quot;&quot;&quot;</span>
 
-<span class="fc" id="L37">    private val issueDAO: IIssueDAO = kodein.instance()</span>
+<span class="fc" id="L35">    private val CRIACAO_ISSUE = &quot;&quot;&quot;{&quot;action&quot;:&quot;created&quot;,&quot;&quot;&quot;</span>
+<span class="fc" id="L36">    private val EDICAO_ISSUE = &quot;&quot;&quot;{&quot;action&quot;:&quot;edited&quot;,&quot;&quot;&quot;</span>
+<span class="fc" id="L37">    private val ABERTURA_ISSUE = &quot;&quot;&quot;{&quot;action&quot;:&quot;opened&quot;,&quot;&quot;&quot;</span>
+<span class="fc" id="L38">    private val EVENTO_EXCLUSAO = &quot;&quot;&quot;{&quot;action&quot;:&quot;deleted&quot;,&quot;&quot;&quot;</span>
+<span class="fc" id="L39">    private val FECHAMENTO_ISSUE = &quot;&quot;&quot;{&quot;action&quot;:&quot;closed&quot;,&quot;&quot;&quot;</span>
+<span class="fc" id="L40">    private val REABERTURA_ISSUE = &quot;&quot;&quot;{&quot;action&quot;:&quot;reopened&quot;,&quot;&quot;&quot;</span>
 
-<span class="fc" id="L39">    private val commentDAO: ICommentDAO = kodein.instance()</span>
+<span class="fc" id="L42">    private val issueDAO: IIssueDAO = kodein.instance()</span>
 
-<span class="fc" id="L41">    private val validator: Validator = kodein.instance()</span>
+<span class="fc" id="L44">    private val commentDAO: ICommentDAO = kodein.instance()</span>
 
-<span class="fc" id="L43">    private val mapper = jacksonObjectMapper()</span>
+<span class="fc" id="L46">    private val validator: Validator = kodein.instance()</span>
+
+<span class="fc" id="L48">    private val mapper = jacksonObjectMapper()</span>
 
     init {
-<span class="fc" id="L46">        mapper.findAndRegisterModules()</span>
-<span class="fc" id="L47">        mapper.enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS)</span>
-<span class="fc" id="L48">        mapper.propertyNamingStrategy =PropertyNamingStrategy.SNAKE_CASE</span>
-<span class="fc" id="L49">        mapper.dateFormat = SimpleDateFormat(&quot;yyyy-MM-dd'T'HH:mm:ss'Z'&quot;)</span>
-<span class="fc" id="L50">        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)</span>
+<span class="fc" id="L51">        mapper.findAndRegisterModules()</span>
+<span class="fc" id="L52">        mapper.enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS)</span>
+<span class="fc" id="L53">        mapper.propertyNamingStrategy =PropertyNamingStrategy.SNAKE_CASE</span>
+<span class="fc" id="L54">        mapper.dateFormat = SimpleDateFormat(&quot;yyyy-MM-dd'T'HH:mm:ss'Z'&quot;)</span>
+<span class="fc" id="L55">        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)</span>
     }
 
+    @Throws(EventServiceException::class)
     fun salvar(jsonEvento: String?){
-<span class="fc bfc" id="L54" title="All 8 branches covered.">        if (jsonEvento.isNullOrBlank() || (!jsonValido(jsonEvento))) {</span>
-<span class="fc" id="L55">            throw EventServiceException(&quot;O json informado estÃ¡ invÃ¡lido.&quot;)</span>
+<span class="fc bfc" id="L60" title="All 8 branches covered.">        if (jsonEvento.isNullOrBlank() || (!jsonValido(jsonEvento))) {</span>
+<span class="fc" id="L61">            throw EventServiceException(&quot;O json informado estÃ¡ invÃ¡lido.&quot;)</span>
         }
-<span class="fc bfc" id="L57" title="All 2 branches covered.">        if (jsonEvento.contains(INICIO_ISSUE)){</span>
-<span class="fc bfc" id="L58" title="All 4 branches covered.">            if ((jsonEvento.startsWith(CRIACAO_ISSUE)) || (jsonEvento.startsWith(ABERTURA_ISSUE))){</span>
-<span class="fc" id="L59">                salvarIssue(jsonEvento)</span>
-<span class="fc bfc" id="L60" title="All 2 branches covered.">            }else if (jsonEvento.startsWith(EDICAO_ISSUE)){</span>
-<span class="fc bfc" id="L61" title="All 2 branches covered.">                if (jsonEvento.contains(INICIO_COMMENT)){</span>
-<span class="fc" id="L62">                    val dto = montarComment(jsonEvento)</span>
-<span class="pc bpc" id="L63" title="1 of 2 branches missed.">                    commentDAO.atualizar(CommentAtualizarDTO(dto!!.body, dto.updatedAt, dto.idGitHub))</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        if (jsonEvento.contains(INICIO_ISSUE)){</span>
+<span class="fc bfc" id="L64" title="All 4 branches covered.">            if ((jsonEvento.startsWith(CRIACAO_ISSUE)) || (jsonEvento.startsWith(ABERTURA_ISSUE))){</span>
+<span class="fc" id="L65">                salvarIssue(jsonEvento)</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">            }else if (jsonEvento.startsWith(EDICAO_ISSUE)){</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">                if (jsonEvento.contains(INICIO_COMMENT)){</span>
+<span class="fc" id="L68">                    val dto = montarComment(jsonEvento)</span>
+<span class="fc" id="L69">                    Conexao.criarConexao()</span>
+<span class="fc" id="L70">                    transaction {</span>
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">                        commentDAO.atualizar(CommentAtualizarDTO(dto!!.body, dto.updatedAt, dto.idGitHub))</span>
+<span class="fc" id="L72">                    }</span>
                 }else{
-<span class="fc" id="L65">                    val dto = montarIssue(jsonEvento)</span>
-<span class="fc" id="L66">                    Conexao.criarConexao()</span>
-<span class="fc" id="L67">                    transaction {</span>
-<span class="pc bpc" id="L68" title="2 of 4 branches missed.">                        issueDAO.atualizar(IssueAtualizacaoDTO(dto!!.idGitHub, dto.title, dto.body, dto.state, dto.updatedAt!!)</span>
-                        )
-<span class="fc" id="L70">                    }</span>
-<span class="fc" id="L71">                }</span>
-<span class="fc bfc" id="L72" title="All 2 branches covered.">            }else if(jsonEvento.startsWith(EVENTO_EXCLUSAO)){</span>
-<span class="fc bfc" id="L73" title="All 2 branches covered.">                if (jsonEvento.contains(INICIO_COMMENT)){</span>
-<span class="fc" id="L74">                    val dto = montarComment(jsonEvento)</span>
+<span class="fc" id="L74">                    val dto = montarIssue(jsonEvento)</span>
 <span class="fc" id="L75">                    Conexao.criarConexao()</span>
 <span class="fc" id="L76">                    transaction {</span>
-<span class="pc bpc" id="L77" title="1 of 2 branches missed.">                        commentDAO.excluirPorIdGitHub(dto!!.idGitHub)</span>
-<span class="fc" id="L78">                    }</span>
+<span class="pc bpc" id="L77" title="2 of 4 branches missed.">                        issueDAO.atualizar(IssueAtualizacaoDTO(dto!!.idGitHub, dto.title, dto.body, dto.state, dto.updatedAt!!)</span>
+                        )
+<span class="fc" id="L79">                    }</span>
+<span class="fc" id="L80">                }</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">            }else if(jsonEvento.startsWith(EVENTO_EXCLUSAO)){</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">                if (jsonEvento.contains(INICIO_COMMENT)){</span>
+<span class="fc" id="L83">                    val dto = montarComment(jsonEvento)</span>
+<span class="fc" id="L84">                    Conexao.criarConexao()</span>
+<span class="fc" id="L85">                    transaction {</span>
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">                        commentDAO.excluirPorIdGitHub(dto!!.idGitHub)</span>
+<span class="fc" id="L87">                    }</span>
                 }else{
-<span class="fc" id="L80">                    val dto = montarIssue(jsonEvento)</span>
-<span class="fc" id="L81">                    Conexao.criarConexao()</span>
-<span class="fc" id="L82">                    transaction {</span>
-<span class="pc bpc" id="L83" title="1 of 2 branches missed.">                        issueDAO.excluirPorIdGitHub(dto!!.idGitHub)</span>
-<span class="pc bpc" id="L84" title="1 of 2 branches missed.">                        commentDAO.excluirCommentsIssue(issueDAO.buscarIdIssue(dto.idGitHub) ?: 0L)</span>
-<span class="fc" id="L85">                    }</span>
-<span class="fc" id="L86">                }</span>
-<span class="pc bpc" id="L87" title="1 of 4 branches missed.">            }else if ((jsonEvento.startsWith(FECHAMENTO_ISSUE)) || (jsonEvento.startsWith(REABERTURA_ISSUE))){</span>
-<span class="fc" id="L88">                val dto = montarIssue(jsonEvento)</span>
-<span class="fc" id="L89">                Conexao.criarConexao()</span>
-<span class="fc" id="L90">                transaction {</span>
-<span class="pc bpc" id="L91" title="2 of 4 branches missed.">                    issueDAO.atualizarDataFechamento(dto!!.closedAt!!, dto.state, dto.idGitHub)</span>
-<span class="fc" id="L92">                }</span>
+<span class="fc" id="L89">                    val dto = montarIssue(jsonEvento)</span>
+<span class="fc" id="L90">                    Conexao.criarConexao()</span>
+<span class="fc" id="L91">                    transaction {</span>
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">                        issueDAO.excluirPorIdGitHub(dto!!.idGitHub)</span>
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">                        commentDAO.excluirCommentsIssue(issueDAO.buscarIdIssue(dto.idGitHub) ?: 0L)</span>
+<span class="fc" id="L94">                    }</span>
+<span class="fc" id="L95">                }</span>
+<span class="pc bpc" id="L96" title="1 of 4 branches missed.">            }else if ((jsonEvento.startsWith(FECHAMENTO_ISSUE)) || (jsonEvento.startsWith(REABERTURA_ISSUE))){</span>
+<span class="fc" id="L97">                val dto = montarIssue(jsonEvento)</span>
+<span class="fc" id="L98">                Conexao.criarConexao()</span>
+<span class="fc" id="L99">                transaction {</span>
+<span class="pc bpc" id="L100" title="2 of 4 branches missed.">                    issueDAO.atualizarDataFechamento(dto!!.closedAt!!, dto.state, dto.idGitHub)</span>
+<span class="fc" id="L101">                }</span>
             }else{
-<span class="fc" id="L94">                throw EventServiceException(&quot;Evento nÃ£o implementado.&quot;)</span>
+<span class="fc" id="L103">                throw EventServiceException(&quot;Evento nÃ£o implementado.&quot;)</span>
             }
         }else{
-<span class="fc" id="L97">            throw EventServiceException(&quot;Evento nÃ£o implementado.&quot;)</span>
+<span class="fc" id="L106">            throw EventServiceException(&quot;Evento nÃ£o implementado.&quot;)</span>
         }
-<span class="fc" id="L99">    }</span>
+<span class="fc" id="L108">    }</span>
 
+    @Throws(EventServiceException::class)
     private fun salvarIssue(json: String){
-<span class="fc" id="L102">        val dtoGerado = montarIssue(json)</span>
-<span class="pc bpc" id="L103" title="1 of 2 branches missed.">        val dtoCadastrado = issueDAO.buscarDetalhes(dtoGerado!!.number)</span>
-<span class="fc bfc" id="L104" title="All 2 branches covered.">        if (dtoCadastrado != null){</span>
-<span class="fc" id="L105">            Conexao.criarConexao()</span>
-<span class="fc" id="L106">            transaction {</span>
-<span class="pc bpc" id="L107" title="1 of 2 branches missed.">                issueDAO.atualizarDataAtualizacao(dtoGerado.updatedAt!!, dtoGerado.state, dtoGerado.idGitHub)</span>
-<span class="fc" id="L108">                salvarComment(json, dtoCadastrado.id)</span>
-<span class="fc" id="L109">            }</span>
+<span class="fc" id="L112">        val dtoGerado = montarIssue(json)</span>
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">        val dtoCadastrado = issueDAO.buscarDetalhes(dtoGerado!!.number)</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">        if (dtoCadastrado != null){</span>
+<span class="fc" id="L115">            Conexao.criarConexao()</span>
+<span class="fc" id="L116">            transaction {</span>
+<span class="pc bpc" id="L117" title="1 of 2 branches missed.">                issueDAO.atualizarDataAtualizacao(dtoGerado.updatedAt!!, dtoGerado.state, dtoGerado.idGitHub)</span>
+<span class="fc" id="L118">                salvarComment(json, dtoCadastrado.id)</span>
+<span class="fc" id="L119">            }</span>
         }else{
-<span class="fc" id="L111">            val violacoes : Set&lt;ConstraintViolation&lt;IssueCadastroDTO&gt;&gt; = validator.validate(dtoGerado)</span>
-<span class="fc" id="L112">            val mensagens = StringBuilder()</span>
-<span class="fc bfc" id="L113" title="All 2 branches covered.">            if (violacoes.any()){</span>
-<span class="fc" id="L114">                violacoes.forEach{</span>
-<span class="fc" id="L115">                    mensagens.append(MessageConfig.montarMensagensConstraints(dtoGerado.javaClass.simpleName + &quot;.&quot;</span>
-<span class="pc bpc" id="L116" title="1 of 2 branches missed.">                            + it.propertyPath.toString(), (it.constraintDescriptor as ConstraintDescriptorImpl).annotationDescriptor.attributes))</span>
-<span class="fc" id="L117">                    mensagens.append(&quot;;&quot;)</span>
-<span class="fc" id="L118">                    mensagens.append(&quot;\r\n&quot;)</span>
-<span class="fc" id="L119">                }</span>
-<span class="fc" id="L120">                mensagens.setLength( mensagens.length -1)</span>
-<span class="fc" id="L121">                throw EventServiceException(&quot;Erro ao salvar a Issue: $mensagens&quot;)</span>
+<span class="fc" id="L121">            val violacoes : Set&lt;ConstraintViolation&lt;IssueCadastroDTO&gt;&gt; = validator.validate(dtoGerado)</span>
+<span class="fc" id="L122">            val mensagens = StringBuilder()</span>
+<span class="fc bfc" id="L123" title="All 2 branches covered.">            if (violacoes.any()){</span>
+<span class="fc" id="L124">                violacoes.forEach{</span>
+<span class="fc" id="L125">                    mensagens.append(MessageConfig.montarMensagensConstraints(dtoGerado.javaClass.simpleName + &quot;.&quot;</span>
+<span class="pc bpc" id="L126" title="1 of 2 branches missed.">                            + it.propertyPath.toString(), (it.constraintDescriptor as ConstraintDescriptorImpl).annotationDescriptor.attributes))</span>
+<span class="fc" id="L127">                    mensagens.append(&quot;;&quot;)</span>
+<span class="fc" id="L128">                    mensagens.append(&quot;\r\n&quot;)</span>
+<span class="fc" id="L129">                }</span>
+<span class="fc" id="L130">                mensagens.setLength( mensagens.length -1)</span>
+<span class="fc" id="L131">                throw EventServiceException(&quot;Erro ao salvar a Issue: $mensagens&quot;)</span>
             }
-<span class="fc" id="L123">            Conexao.criarConexao()</span>
-<span class="fc" id="L124">            transaction {</span>
-<span class="fc" id="L125">                issueDAO.cadastrar(dtoGerado)</span>
-<span class="fc" id="L126">            }</span>
+<span class="fc" id="L133">            Conexao.criarConexao()</span>
+<span class="fc" id="L134">            transaction {</span>
+<span class="fc" id="L135">                issueDAO.cadastrar(dtoGerado)</span>
+<span class="fc" id="L136">            }</span>
         }
-<span class="fc" id="L128">    }</span>
+<span class="fc" id="L138">    }</span>
 
+    @Throws(EventServiceException::class)
     private fun salvarComment(json: String, idIssue: Long){
-<span class="fc" id="L131">        val dtoGerado = montarComment(json)</span>
-<span class="pc bpc" id="L132" title="1 of 2 branches missed.">        dtoGerado!!.idIssue = idIssue</span>
-<span class="fc" id="L133">        val violacoes : Set&lt;ConstraintViolation&lt;CommentCadastroDTO&gt;&gt; = validator.validate(dtoGerado)</span>
-<span class="fc" id="L134">        val mensagens = StringBuilder()</span>
-<span class="fc bfc" id="L135" title="All 2 branches covered.">        if (violacoes.any()){</span>
-<span class="fc" id="L136">            violacoes.forEach{</span>
-<span class="fc" id="L137">                mensagens.append(MessageConfig.montarMensagensConstraints(dtoGerado.javaClass.simpleName + &quot;.&quot;</span>
-<span class="pc bpc" id="L138" title="1 of 2 branches missed.">                        + it.propertyPath.toString(), (it.constraintDescriptor as ConstraintDescriptorImpl).annotationDescriptor.attributes))</span>
-<span class="fc" id="L139">                mensagens.append(&quot;;&quot;)</span>
-<span class="fc" id="L140">                mensagens.append(&quot;\r\n&quot;)</span>
-<span class="fc" id="L141">            }</span>
-<span class="fc" id="L142">            mensagens.setLength( mensagens.length -1)</span>
-<span class="fc" id="L143">            throw EventServiceException(&quot;Erro ao salvar o ComentÃ¡rio: $mensagens&quot;)</span>
+<span class="fc" id="L142">        val dtoGerado = montarComment(json)</span>
+<span class="pc bpc" id="L143" title="1 of 2 branches missed.">        dtoGerado!!.idIssue = idIssue</span>
+<span class="fc" id="L144">        val violacoes : Set&lt;ConstraintViolation&lt;CommentCadastroDTO&gt;&gt; = validator.validate(dtoGerado)</span>
+<span class="fc" id="L145">        val mensagens = StringBuilder()</span>
+<span class="fc bfc" id="L146" title="All 2 branches covered.">        if (violacoes.any()){</span>
+<span class="fc" id="L147">            violacoes.forEach{</span>
+<span class="fc" id="L148">                mensagens.append(MessageConfig.montarMensagensConstraints(dtoGerado.javaClass.simpleName + &quot;.&quot;</span>
+<span class="pc bpc" id="L149" title="1 of 2 branches missed.">                        + it.propertyPath.toString(), (it.constraintDescriptor as ConstraintDescriptorImpl).annotationDescriptor.attributes))</span>
+<span class="fc" id="L150">                mensagens.append(&quot;;&quot;)</span>
+<span class="fc" id="L151">                mensagens.append(&quot;\r\n&quot;)</span>
+<span class="fc" id="L152">            }</span>
+<span class="fc" id="L153">            mensagens.setLength( mensagens.length -1)</span>
+<span class="fc" id="L154">            throw EventServiceException(&quot;Erro ao salvar o ComentÃ¡rio: $mensagens&quot;)</span>
         }
-<span class="fc" id="L145">        Conexao.criarConexao()</span>
-<span class="fc" id="L146">        transaction {</span>
-<span class="fc" id="L147">            commentDAO.cadastrar(dtoGerado)</span>
-<span class="fc" id="L148">        }</span>
-<span class="fc" id="L149">    }</span>
+<span class="fc" id="L156">        Conexao.criarConexao()</span>
+<span class="fc" id="L157">        transaction {</span>
+<span class="fc" id="L158">            commentDAO.cadastrar(dtoGerado)</span>
+<span class="fc" id="L159">        }</span>
+<span class="fc" id="L160">    }</span>
 
+    @Throws(Exception::class)
     private fun montarIssue(json: String): IssueCadastroDTO?{
-<span class="fc" id="L152">        var jsonIssue = buscarJsonInterno(json, INICIO_ISSUE, FINAL_ISSUE)</span>
-<span class="pc bpc" id="L153" title="1 of 2 branches missed.">        val jsonUsuario = jsonIssue.substring(jsonIssue.indexOf(&quot;&quot;&quot;&quot;user&quot;:&quot;&quot;&quot;) + &quot;&quot;&quot;&quot;user&quot;:&quot;&quot;&quot;.length, jsonIssue.indexOf(&quot;&quot;&quot;},&quot;labels&quot;:&quot;&quot;&quot;) + 1)</span>
-<span class="fc" id="L154">        jsonIssue = jsonIssue.replace(&quot;&quot;&quot;&quot;user&quot;:$jsonUsuario,&quot;&quot;&quot; , &quot;&quot;)</span>
-<span class="fc" id="L155">        val dto : IssueCadastroDTO?</span>
-<span class="fc" id="L156">        try{</span>
-<span class="fc" id="L157">            dto = mapper.readValue&lt;IssueCadastroDTO&gt;(jsonIssue)</span>
-<span class="fc" id="L158">            val mapaUsuario :Map&lt;String, String&gt; = mapper.readValue(jsonUsuario, object: TypeReference&lt;Map&lt;String, String&gt;&gt;(){})</span>
-<span class="fc" id="L159">            dto.userName = mapaUsuario[&quot;login&quot;]</span>
-<span class="nc" id="L160">        }catch (e: Exception){</span>
-<span class="nc" id="L161">            throw e</span>
+<span class="fc" id="L164">        var jsonIssue = buscarJsonInterno(json, INICIO_ISSUE, FINAL_ISSUE)</span>
+<span class="pc bpc" id="L165" title="1 of 2 branches missed.">        val jsonUsuario = jsonIssue.substring(jsonIssue.indexOf(&quot;&quot;&quot;&quot;user&quot;:&quot;&quot;&quot;) + &quot;&quot;&quot;&quot;user&quot;:&quot;&quot;&quot;.length, jsonIssue.indexOf(&quot;&quot;&quot;},&quot;labels&quot;:&quot;&quot;&quot;) + 1)</span>
+<span class="fc" id="L166">        jsonIssue = jsonIssue.replace(&quot;&quot;&quot;&quot;user&quot;:$jsonUsuario,&quot;&quot;&quot; , &quot;&quot;)</span>
+<span class="fc" id="L167">        val dto : IssueCadastroDTO?</span>
+<span class="fc" id="L168">        try{</span>
+<span class="fc" id="L169">            dto = mapper.readValue&lt;IssueCadastroDTO&gt;(jsonIssue)</span>
+<span class="fc" id="L170">            val mapaUsuario :Map&lt;String, String&gt; = mapper.readValue(jsonUsuario, object: TypeReference&lt;Map&lt;String, String&gt;&gt;(){})</span>
+<span class="fc" id="L171">            dto.userName = mapaUsuario[&quot;login&quot;]</span>
+<span class="nc" id="L172">        }catch (e: Exception){</span>
+<span class="nc" id="L173">            log.error(&quot;erro ao gerar a issue a partir do json $json&quot;)</span>
+<span class="nc" id="L174">            log.error(ExceptionUtils.getStackTrace(e))</span>
+<span class="nc" id="L175">            throw e</span>
         }
-<span class="fc" id="L163">        return dto</span>
+<span class="fc" id="L177">        return dto</span>
     }
 
+    @Throws(Exception::class)
     private fun montarComment(json: String): CommentCadastroDTO?{
-<span class="fc" id="L167">        var jsonComment = buscarJsonInterno(json, INICIO_COMMENT, FINAL_ISSUE)</span>
-<span class="pc bpc" id="L168" title="1 of 2 branches missed.">        val jsonUsuario = jsonComment.substring(jsonComment.indexOf(&quot;&quot;&quot;&quot;user&quot;:&quot;&quot;&quot;) + &quot;&quot;&quot;&quot;user&quot;:&quot;&quot;&quot;.length, jsonComment.indexOf(&quot;&quot;&quot;},&quot;created_at&quot;:&quot;&quot;&quot;) + 1)</span>
-<span class="fc" id="L169">        jsonComment = jsonComment.replace(&quot;&quot;&quot;&quot;user&quot;:$jsonUsuario,&quot;&quot;&quot; , &quot;&quot;)</span>
-<span class="fc" id="L170">        val dto: CommentCadastroDTO?</span>
-<span class="fc" id="L171">        try{</span>
-<span class="fc" id="L172">            dto = mapper.readValue(jsonComment, CommentCadastroDTO::class.java)</span>
-<span class="fc" id="L173">            val mapaUsuario :Map&lt;String, String&gt; = mapper.readValue(jsonUsuario, object: TypeReference&lt;Map&lt;String, String&gt;&gt;(){})</span>
-<span class="fc" id="L174">            dto.userName = mapaUsuario[&quot;login&quot;]</span>
-<span class="nc" id="L175">        }catch (e: Exception){</span>
-<span class="nc" id="L176">            throw e</span>
+<span class="fc" id="L182">        var jsonComment = buscarJsonInterno(json, INICIO_COMMENT, FINAL_ISSUE)</span>
+<span class="pc bpc" id="L183" title="1 of 2 branches missed.">        val jsonUsuario = jsonComment.substring(jsonComment.indexOf(&quot;&quot;&quot;&quot;user&quot;:&quot;&quot;&quot;) + &quot;&quot;&quot;&quot;user&quot;:&quot;&quot;&quot;.length, jsonComment.indexOf(&quot;&quot;&quot;},&quot;created_at&quot;:&quot;&quot;&quot;) + 1)</span>
+<span class="fc" id="L184">        jsonComment = jsonComment.replace(&quot;&quot;&quot;&quot;user&quot;:$jsonUsuario,&quot;&quot;&quot; , &quot;&quot;)</span>
+<span class="fc" id="L185">        val dto: CommentCadastroDTO?</span>
+<span class="fc" id="L186">        try{</span>
+<span class="fc" id="L187">            dto = mapper.readValue(jsonComment, CommentCadastroDTO::class.java)</span>
+<span class="fc" id="L188">            val mapaUsuario :Map&lt;String, String&gt; = mapper.readValue(jsonUsuario, object: TypeReference&lt;Map&lt;String, String&gt;&gt;(){})</span>
+<span class="fc" id="L189">            dto.userName = mapaUsuario[&quot;login&quot;]</span>
+<span class="nc" id="L190">        }catch (e: Exception){</span>
+<span class="nc" id="L191">            log.error(&quot;erro ao gerar o comentario a partir do json $json&quot;)</span>
+<span class="nc" id="L192">            log.error(ExceptionUtils.getStackTrace(e))</span>
+<span class="nc" id="L193">            throw e</span>
         }
-<span class="fc" id="L178">        return dto</span>
+<span class="fc" id="L195">        return dto</span>
     }
 
+    @Throws(EventServiceException::class)
     private fun buscarJsonInterno(json: String, inicio: String, fim: String): String{
-<span class="fc" id="L182">        var indicieInicial = json.indexOf(inicio)</span>
-<span class="fc" id="L183">        var indicieFinal = json.indexOf(fim)</span>
-<span class="pc bpc" id="L184" title="2 of 4 branches missed.">        if ((indicieFinal &lt; 0) || (indicieFinal &lt; 0)){</span>
-<span class="nc" id="L185">            throw EventServiceException(&quot;O json informado nÃ£o Ã© conhecido pela aplicaÃ§Ã£o.&quot;)</span>
+<span class="fc" id="L200">        var indicieInicial = json.indexOf(inicio)</span>
+<span class="fc" id="L201">        var indicieFinal = json.indexOf(fim)</span>
+<span class="pc bpc" id="L202" title="2 of 4 branches missed.">        if ((indicieFinal &lt; 0) || (indicieFinal &lt; 0)){</span>
+<span class="nc" id="L203">            throw EventServiceException(&quot;O json informado nÃ£o Ã© conhecido pela aplicaÃ§Ã£o.&quot;)</span>
         }
-<span class="fc" id="L187">        indicieInicial += inicio.length</span>
-<span class="fc" id="L188">        indicieFinal += -1</span>
-<span class="pc bpc" id="L189" title="1 of 2 branches missed.">        return json.substring(json.indexOf(inicio) + inicio.length, json.indexOf(fim) -1)</span>
+<span class="fc" id="L205">        indicieInicial += inicio.length</span>
+<span class="fc" id="L206">        indicieFinal += -1</span>
+<span class="pc bpc" id="L207" title="1 of 2 branches missed.">        return json.substring(json.indexOf(inicio) + inicio.length, json.indexOf(fim) -1)</span>
     }
 
+    @Throws(Exception::class)
     private fun jsonValido(json: String): Boolean{
-<span class="fc" id="L193">        var valido = true</span>
-<span class="fc" id="L194">        try{</span>
-<span class="fc" id="L195">            mapper.readTree(json)</span>
-<span class="fc" id="L196">        }catch (ex: Exception){</span>
-<span class="fc" id="L197">            valido = false</span>
+<span class="fc" id="L212">        var valido = true</span>
+<span class="fc" id="L213">        try{</span>
+<span class="fc" id="L214">            mapper.readTree(json)</span>
+<span class="fc" id="L215">        }catch (ex: Exception){</span>
+<span class="fc" id="L216">            valido = false</span>
         }
-<span class="fc" id="L199">        return valido</span>
+<span class="fc" id="L218">        return valido</span>
     }
 
+    @Throws(Exception::class)
     fun buscarIssue(number: Long): IssueDetalhadaDTO?{
-<span class="fc" id="L203">        var dto: IssueDetalhadaDTO? = null</span>
-<span class="fc" id="L204">        try{</span>
-<span class="fc" id="L205">            Conexao.criarConexao()</span>
-<span class="fc" id="L206">            transaction {</span>
-<span class="fc" id="L207">                dto = issueDAO.buscarDetalhes(number)</span>
-<span class="fc bfc" id="L208" title="All 2 branches covered.">                if (dto != null){</span>
-<span class="pc bpc" id="L209" title="2 of 4 branches missed.">                    dto!!.comments = commentDAO.buscarCommentsIssue(dto!!.id)</span>
+<span class="fc" id="L223">        var dto: IssueDetalhadaDTO? = null</span>
+<span class="fc" id="L224">        try{</span>
+<span class="fc" id="L225">            Conexao.criarConexao()</span>
+<span class="fc" id="L226">            transaction {</span>
+<span class="fc" id="L227">                dto = issueDAO.buscarDetalhes(number)</span>
+<span class="fc bfc" id="L228" title="All 2 branches covered.">                if (dto != null){</span>
+<span class="pc bpc" id="L229" title="2 of 4 branches missed.">                    dto!!.comments = commentDAO.buscarCommentsIssue(dto!!.id)</span>
                 }
-<span class="fc" id="L211">            }</span>
-<span class="fc" id="L212">        }catch (e: Exception){</span>
-<span class="fc" id="L213">            throw e</span>
+<span class="fc" id="L231">            }</span>
+<span class="fc" id="L232">        }catch (e: Exception){</span>
+<span class="fc" id="L233">            log.error(&quot;erro ao buscar a issue de numero $number&quot;)</span>
+<span class="fc" id="L234">            log.error(ExceptionUtils.getStackTrace(e))</span>
+<span class="fc" id="L235">            throw e</span>
         }
-<span class="fc" id="L215">        return dto</span>
+<span class="fc" id="L237">        return dto</span>
     }
 
 }

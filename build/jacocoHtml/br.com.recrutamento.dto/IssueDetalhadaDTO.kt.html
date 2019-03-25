@@ -9,11 +9,11 @@ import java.time.LocalDateTime
 <span class="fc" id="L9">    val title: String,</span>
 <span class="fc" id="L10">    val body: String,</span>
 <span class="fc" id="L11">    val state: IssueStatusEnum,</span>
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = &quot;dd-MM-yyyy hh:mm:ss&quot;)
+    @field:JsonFormat(shape = JsonFormat.Shape.STRING, pattern = &quot;dd-MM-yyyy hh:mm:ss&quot;)
 <span class="fc" id="L13">    val createdAt: LocalDateTime?,</span>
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = &quot;dd-MM-yyyy hh:mm:ss&quot;)
+    @field:JsonFormat(shape = JsonFormat.Shape.STRING, pattern = &quot;dd-MM-yyyy hh:mm:ss&quot;)
 <span class="fc" id="L15">    val updatedAt: LocalDateTime?,</span>
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = &quot;dd-MM-yyyy hh:mm:ss&quot;)
+    @field:JsonFormat(shape = JsonFormat.Shape.STRING, pattern = &quot;dd-MM-yyyy hh:mm:ss&quot;)
 <span class="fc" id="L17">    val closedAt: LocalDateTime?,</span>
 <span class="fc" id="L18">    val userName: String</span>
 ){

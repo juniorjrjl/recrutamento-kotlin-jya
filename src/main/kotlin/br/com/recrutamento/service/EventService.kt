@@ -14,14 +14,19 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.instance
+import db.migration.V201903251426__CriacaoTabelasProjeto
+import org.apache.commons.lang3.exception.ExceptionUtils
 import org.hibernate.validator.internal.metadata.descriptor.ConstraintDescriptorImpl
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.slf4j.LoggerFactory
 import java.lang.StringBuilder
 import java.text.SimpleDateFormat
 import javax.validation.ConstraintViolation
 import javax.validation.Validator
 
 class EventService (private val kodein: Kodein){
+
+    private val log = LoggerFactory.getLogger(EventService::class.java)
 
     private val INICIO_ISSUE = """"issue":"""
     private val FINAL_ISSUE = """"repository":{"""
@@ -50,6 +55,7 @@ class EventService (private val kodein: Kodein){
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
     }
 
+    @Throws(EventServiceException::class)
     fun salvar(jsonEvento: String?){
         if (jsonEvento.isNullOrBlank() || (!jsonValido(jsonEvento))) {
             throw EventServiceException("O json informado está inválido.")
@@ -60,7 +66,10 @@ class EventService (private val kodein: Kodein){
             }else if (jsonEvento.startsWith(EDICAO_ISSUE)){
                 if (jsonEvento.contains(INICIO_COMMENT)){
                     val dto = montarComment(jsonEvento)
-                    commentDAO.atualizar(CommentAtualizarDTO(dto!!.body, dto.updatedAt, dto.idGitHub))
+                    Conexao.criarConexao()
+                    transaction {
+                        commentDAO.atualizar(CommentAtualizarDTO(dto!!.body, dto.updatedAt, dto.idGitHub))
+                    }
                 }else{
                     val dto = montarIssue(jsonEvento)
                     Conexao.criarConexao()
@@ -98,6 +107,7 @@ class EventService (private val kodein: Kodein){
         }
     }
 
+    @Throws(EventServiceException::class)
     private fun salvarIssue(json: String){
         val dtoGerado = montarIssue(json)
         val dtoCadastrado = issueDAO.buscarDetalhes(dtoGerado!!.number)
@@ -127,6 +137,7 @@ class EventService (private val kodein: Kodein){
         }
     }
 
+    @Throws(EventServiceException::class)
     private fun salvarComment(json: String, idIssue: Long){
         val dtoGerado = montarComment(json)
         dtoGerado!!.idIssue = idIssue
@@ -148,6 +159,7 @@ class EventService (private val kodein: Kodein){
         }
     }
 
+    @Throws(Exception::class)
     private fun montarIssue(json: String): IssueCadastroDTO?{
         var jsonIssue = buscarJsonInterno(json, INICIO_ISSUE, FINAL_ISSUE)
         val jsonUsuario = jsonIssue.substring(jsonIssue.indexOf(""""user":""") + """"user":""".length, jsonIssue.indexOf("""},"labels":""") + 1)
@@ -158,11 +170,14 @@ class EventService (private val kodein: Kodein){
             val mapaUsuario :Map<String, String> = mapper.readValue(jsonUsuario, object: TypeReference<Map<String, String>>(){})
             dto.userName = mapaUsuario["login"]
         }catch (e: Exception){
+            log.error("erro ao gerar a issue a partir do json $json")
+            log.error(ExceptionUtils.getStackTrace(e))
             throw e
         }
         return dto
     }
 
+    @Throws(Exception::class)
     private fun montarComment(json: String): CommentCadastroDTO?{
         var jsonComment = buscarJsonInterno(json, INICIO_COMMENT, FINAL_ISSUE)
         val jsonUsuario = jsonComment.substring(jsonComment.indexOf(""""user":""") + """"user":""".length, jsonComment.indexOf("""},"created_at":""") + 1)
@@ -173,11 +188,14 @@ class EventService (private val kodein: Kodein){
             val mapaUsuario :Map<String, String> = mapper.readValue(jsonUsuario, object: TypeReference<Map<String, String>>(){})
             dto.userName = mapaUsuario["login"]
         }catch (e: Exception){
+            log.error("erro ao gerar o comentario a partir do json $json")
+            log.error(ExceptionUtils.getStackTrace(e))
             throw e
         }
         return dto
     }
 
+    @Throws(EventServiceException::class)
     private fun buscarJsonInterno(json: String, inicio: String, fim: String): String{
         var indicieInicial = json.indexOf(inicio)
         var indicieFinal = json.indexOf(fim)
@@ -189,6 +207,7 @@ class EventService (private val kodein: Kodein){
         return json.substring(json.indexOf(inicio) + inicio.length, json.indexOf(fim) -1)
     }
 
+    @Throws(Exception::class)
     private fun jsonValido(json: String): Boolean{
         var valido = true
         try{
@@ -199,6 +218,7 @@ class EventService (private val kodein: Kodein){
         return valido
     }
 
+    @Throws(Exception::class)
     fun buscarIssue(number: Long): IssueDetalhadaDTO?{
         var dto: IssueDetalhadaDTO? = null
         try{
@@ -210,6 +230,8 @@ class EventService (private val kodein: Kodein){
                 }
             }
         }catch (e: Exception){
+            log.error("erro ao buscar a issue de numero $number")
+            log.error(ExceptionUtils.getStackTrace(e))
             throw e
         }
         return dto

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="br.com.recrutamento.service.verificando eventos de exclusão" tests="2" skipped="0" failures="0" errors="0" timestamp="2019-03-25T01:22:12" hostname="junior-pc" time="0.117">
+<testsuite name="br.com.recrutamento.service.verificando eventos de exclusão" tests="2" skipped="0" failures="0" errors="0" timestamp="2019-03-25T18:31:38" hostname="junior-pc" time="0.223">
   <properties/>
-  <testcase name="verificando exclusão de issue(String)[1]" classname="br.com.recrutamento.service.verificando eventos de exclusão" time="0.025"/>
-  <testcase name="verificando exclusão de comentario(String)[1]" classname="br.com.recrutamento.service.verificando eventos de exclusão" time="0.012"/>
+  <testcase name="verificando exclusão de issue(String)[1]" classname="br.com.recrutamento.service.verificando eventos de exclusão" time="0.059"/>
+  <testcase name="verificando exclusão de comentario(String)[1]" classname="br.com.recrutamento.service.verificando eventos de exclusão" time="0.049"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

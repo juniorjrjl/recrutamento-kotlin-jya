@@ -2,10 +2,7 @@ package br.com.recrutamento.controller
 
 import br.com.recrutamento.config.AppConfig
 import br.com.recrutamento.controller.EventController.eventService
-import br.com.recrutamento.dto.CommentCadastroDTO
-import br.com.recrutamento.dto.ErroResponse
-import br.com.recrutamento.dto.IssueDetalhadaDTO
-import br.com.recrutamento.dto.IssueStatusEnum
+import br.com.recrutamento.dto.*
 import br.com.recrutamento.exception.EventServiceException
 import br.com.recrutamento.service.EventService
 import com.fasterxml.jackson.databind.DeserializationFeature
@@ -19,6 +16,7 @@ import com.github.salomonbrys.kodein.singleton
 import com.nhaarman.mockitokotlin2.*
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder
+import io.javalin.json.JavalinJackson
 import org.eclipse.jetty.http.HttpStatus
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.*
@@ -44,6 +42,7 @@ class `testando os endpoints de event` {
 
     @BeforeEach
     fun `setUp`(){
+        JavalinJackson.configure(jacksonObjectMapper().findAndRegisterModules())
         EventController.eventService = eventServiceMock
         app.routes{
             ApiBuilder.path("events/:number/events") {
@@ -86,14 +85,19 @@ class `testando os endpoints de event` {
         val createdAt = LocalDateTime.now()
         val updatedAt = createdAt.plusMonths(2)
         val closedAt = updatedAt.plusMonths(2)
-        whenever(eventServiceMock.buscarIssue(5)).thenReturn(IssueDetalhadaDTO(1,1,"title", "body", IssueStatusEnum.OPEN, createdAt, updatedAt, closedAt, "userName"))
+        val createdAtComment = LocalDateTime.now()
+        val updatedAtComment = createdAt.plusMonths(2)
+        val dtoRetorno = IssueDetalhadaDTO(1,1,"title", "body", IssueStatusEnum.OPEN, createdAt, updatedAt, closedAt, "userName")
+        dtoRetorno.comments = listOf(CommentDetalhadoDTO("userName", "body", createdAtComment, updatedAtComment))
+        whenever(eventServiceMock.buscarIssue(5)).thenReturn(dtoRetorno)
         val response  = khttp.get(bucarIssues.replace(":number", "5"))
         val dto = response.text
         assertEquals( HttpStatus.OK_200, response.statusCode)
-        /*assertDoesNotThrow( response.text.deserialize())
         assertTrue(dto.contains(createdAt.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss"))))
         assertTrue(dto.contains(updatedAt.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss"))))
-        assertTrue(dto.contains(closedAt.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss"))))*/
+        assertTrue(dto.contains(closedAt.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss"))))
+        assertTrue(dto.contains(createdAtComment.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss"))))
+        assertTrue(dto.contains(updatedAtComment.format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss"))))
     }
 
     @Test

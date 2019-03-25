@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="br.com.recrutamento.service.testes do classe Eventservice" tests="2" skipped="0" failures="0" errors="0" timestamp="2019-03-25T01:22:12" hostname="junior-pc" time="0.053">
+<testsuite name="br.com.recrutamento.service.testes do classe Eventservice" tests="2" skipped="0" failures="0" errors="0" timestamp="2019-03-25T18:31:36" hostname="junior-pc" time="0.162">
   <properties/>
-  <testcase name="retornar Issue sem comentários()" classname="br.com.recrutamento.service.testes do classe Eventservice" time="0.012"/>
-  <testcase name="retornando Issue nula()" classname="br.com.recrutamento.service.testes do classe Eventservice" time="0.009"/>
+  <testcase name="retornar Issue sem comentários()" classname="br.com.recrutamento.service.testes do classe Eventservice" time="0.103"/>
+  <testcase name="retornando Issue nula()" classname="br.com.recrutamento.service.testes do classe Eventservice" time="0.008"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
